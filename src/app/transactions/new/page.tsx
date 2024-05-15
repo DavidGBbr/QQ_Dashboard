@@ -1,27 +1,34 @@
 import React from "react";
 import "../../../styles/form.css";
 
-const CreateModulePage = () => {
+const CreateTransactionPage = () => {
   return (
     <main className="container">
       <div className="page-header">
         <button className="button-green">{"< Voltar"}</button>
-        <h2>Criar módulo</h2>
+        <h2>Criar transação</h2>
       </div>
 
       <div className="form-wrapper">
         <form action="" className="form-container">
           <label htmlFor="module">
             <span>Nome do módulo:</span>
+            <select name="modules" id="modules">
+              <option value="recursos_humanos">Recursos humanos</option>
+              <option value="estoque">Estoque</option>
+            </select>
+          </label>
+          <label htmlFor="transaction">
+            <span>Nome da transação:</span>
             <input
               type="text"
-              name="module"
-              id="module"
-              placeholder="Digite o nome do módulo..."
+              name="transaction"
+              id="transaction"
+              placeholder="Digite o nome do transação..."
             />
           </label>
           <button type="submit" className="button-orange">
-            Criar módulo
+            Criar transação
           </button>
         </form>
       </div>
@@ -29,4 +36,4 @@ const CreateModulePage = () => {
   );
 };
 
-export default CreateModulePage;
+export default CreateTransactionPage;

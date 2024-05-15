@@ -43,7 +43,8 @@ span {
   margin-bottom: 0.3rem;
 }
 
-input {
+input,
+select {
   width: 100%;
   padding: 0.5rem;
   border-radius: 0.2rem;
@@ -54,7 +55,9 @@ input {
 }
 
 input:focus,
-input:hover {
+input:hover,
+select:focus,
+select:hover {
   outline: 2px solid #fba931;
 }
 
