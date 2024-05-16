@@ -36,7 +36,7 @@ label {
   width: 100%;
 }
 
-span {
+.form-container span {
   color: white;
   font-weight: 400;
   margin-left: 0.3rem;
@@ -67,7 +67,7 @@ form button {
   border-radius: 0.2rem;
   border: none;
   outline: none;
-  font-weight: 900;
+  font-weight: bold;
   margin-bottom: 0.3rem;
   transition: all 0.5s;
   cursor: pointer;

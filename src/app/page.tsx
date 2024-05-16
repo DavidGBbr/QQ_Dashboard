@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import "../styles/form.css";
 
-const page = () => {
+const Login = () => {
   return (
     <main className="container">
       <Image src="/images/logo.svg" alt="Logo" width={100} height={100} />
@@ -24,4 +24,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Login;
