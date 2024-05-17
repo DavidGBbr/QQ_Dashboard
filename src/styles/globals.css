@@ -28,3 +28,36 @@ img {
   padding: 1.25rem;
   margin: 0 auto;
 }
+
+.list_items {
+  list-style: none;
+  min-width: 50vw;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.list_items div {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.list_items li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  background-color: #00481d;
+  padding: 0.6rem;
+  border-radius: 0.5rem;
+}
+
+.list_items button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  outline: none;
+  display: flex;
+  cursor: pointer;
+}

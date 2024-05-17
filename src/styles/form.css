@@ -108,11 +108,15 @@ a {
 
 .page-header {
   min-width: 50vw;
-
   display: flex;
   gap: 0.3rem;
   align-items: center;
   color: #fff;
+}
+
+.page-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
 }
 
 .page-header button {
@@ -122,6 +126,28 @@ a {
   outline: none;
   padding: 0.3rem;
   border-radius: 0.2rem;
+  transition: all 0.5s;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.search-input {
+  min-width: 50vw;
+  display: flex;
+}
+
+.search-input input {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.search-input button {
+  padding: 0.7rem;
+  border-top-right-radius: 0.2rem;
+  border-bottom-right-radius: 0.2rem;
+  border: none;
+  outline: 2px solid #003917;
+  font-weight: bold;
   transition: all 0.5s;
   cursor: pointer;
 }
