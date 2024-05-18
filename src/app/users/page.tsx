@@ -2,8 +2,10 @@ import Sidenav from "@/components/Sidenav";
 import React from "react";
 import "../../styles/form.css";
 import ListItems from "@/components/ListItems";
+import { FaUser } from "react-icons/fa";
+import { FaGear, FaTrashCan } from "react-icons/fa6";
 
-const Users = () => {
+const Users: React.FC = () => {
   const users = [
     {
       id: 0,
@@ -24,6 +26,7 @@ const Users = () => {
       profile: "Comum",
     },
   ];
+
   return (
     <Sidenav>
       <main className="container">
@@ -36,7 +39,7 @@ const Users = () => {
           <button className="button-green">Filtrar</button>
         </div>
         <div>
-          <ListItems items={users} />
+          <ListItems items={users} ItemIcon={FaUser} />
         </div>
       </main>
     </Sidenav>

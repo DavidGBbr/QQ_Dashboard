@@ -1,5 +1,6 @@
 import React from "react";
-import { FaUser } from "react-icons/fa";
+import { IconType } from "react-icons";
+
 import { FaGear, FaTrashCan } from "react-icons/fa6";
 
 interface User {
@@ -11,15 +12,16 @@ interface User {
 
 interface ListItemsProps {
   items: User[];
+  ItemIcon: IconType;
 }
 
-const ListItems: React.FC<ListItemsProps> = ({ items }) => {
+const ListItems: React.FC<ListItemsProps> = ({ items, ItemIcon }) => {
   return (
     <ul className="list_items">
       {items.map((item) => (
         <li key={item.id}>
           <div>
-            <FaUser size={30} />
+            <ItemIcon size={30} />
             <strong>{item.name}</strong>
           </div>
           <p>{item.email}</p>
