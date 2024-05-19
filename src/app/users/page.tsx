@@ -3,7 +3,6 @@ import React from "react";
 import "../../styles/form.css";
 import ListItems from "@/components/ListItems";
 import { FaUser } from "react-icons/fa";
-import { FaGear, FaTrashCan } from "react-icons/fa6";
 
 const Users: React.FC = () => {
   const users = [
