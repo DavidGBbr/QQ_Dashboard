@@ -17,7 +17,7 @@ interface ListItemsProps {
 
 const ListItems: React.FC<ListItemsProps> = ({ items, ItemIcon }) => {
   return (
-    <ul className="list_items">
+    <ul className="list-items">
       {items.map((item) => (
         <li key={item.id}>
           <div>

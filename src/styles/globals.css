@@ -29,7 +29,7 @@ img {
   margin: 0 auto;
 }
 
-.list_items {
+.list-items {
   list-style: none;
   min-width: 50vw;
   display: flex;
@@ -37,13 +37,13 @@ img {
   gap: 0.7rem;
 }
 
-.list_items div {
+.list-items div {
   display: flex;
   align-items: center;
   gap: 0.25rem;
 }
 
-.list_items li {
+.list-items li {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -55,11 +55,11 @@ img {
   cursor: pointer;
 }
 
-.list_items li:hover {
+.list-items li:hover {
   transform: scale(0.99);
 }
 
-.list_items button {
+.list-items button {
   background-color: transparent;
   color: white;
   border: none;
@@ -69,6 +69,6 @@ img {
   cursor: pointer;
 }
 
-.list_items button:hover {
+.list-items button:hover {
   color: #fba931;
 }
