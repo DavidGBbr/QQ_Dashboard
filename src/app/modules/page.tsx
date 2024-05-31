@@ -3,18 +3,17 @@ import Sidenav from "@/components/Sidenav";
 import React from "react";
 import "../../styles/form.css";
 import { MdOutlineViewModule } from "react-icons/md";
+import { ModuleType } from "@/types/Module";
 
-const Modules = () => {
-  const modules = [
-    {
-      id: 0,
-      name: "Recursos humanos",
-    },
-    {
-      id: 1,
-      name: "Estoque",
-    },
-  ];
+const Modules = async () => {
+  const response = await fetch("http://localhost:3333/module");
+  const data = (await response.json()) as ModuleType[];
+
+  const modules = data.map((item) => ({
+    id: item.moduleId,
+    name: item.name,
+  }));
+
   return (
     <Sidenav>
       <main className="container">
