@@ -3,26 +3,19 @@ import Sidenav from "@/components/Sidenav";
 import React from "react";
 import "../../styles/form.css";
 import { MdOutlineWindow } from "react-icons/md";
+import { ModuleTransactionType } from "@/types/ModuleTransaction";
 
-const Transactions = () => {
-  const transactions = [
-    {
-      id: 0,
-      name: "Gerenciar Dados de Funcionários - (Recursos humanos)",
-    },
-    {
-      id: 1,
-      name: "Gerenciar Salários - (Recursos humanos)",
-    },
-    {
-      id: 2,
-      name: "Gerenciar estoque - (Estoque)",
-    },
-    {
-      id: 3,
-      name: "Registrar Entrada de Produtos - (Estoque)",
-    },
-  ];
+const Transactions = async () => {
+  const response = await fetch("http://localhost:3333/transaction");
+  const data = (await response.json()) as ModuleTransactionType[];
+
+  console.log(data);
+
+  const transactions = data.map((item) => ({
+    id: item.moduleId,
+    name: `${item.transactionName} - (${item.moduleName})`,
+  }));
+
   return (
     <Sidenav>
       <main className="container">
