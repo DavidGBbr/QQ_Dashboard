@@ -4,9 +4,12 @@ import React from "react";
 import "../../styles/form.css";
 import { MdOutlineViewModule } from "react-icons/md";
 import { ModuleType } from "@/types/Module";
+import RedirectBtn from "@/components/RedirectBtn";
 
 const Modules = async () => {
-  const response = await fetch("http://localhost:3333/module");
+  const response = await fetch("http://localhost:3333/module", {
+    next: { revalidate: 0 },
+  });
   const data = (await response.json()) as ModuleType[];
 
   const modules = data.map((item) => ({
@@ -19,7 +22,7 @@ const Modules = async () => {
       <main className="container">
         <div className="page-header">
           <h2>Módulos</h2>
-          <button className="button-green">Registrar</button>
+          <RedirectBtn path="modules/new">Registrar</RedirectBtn>
         </div>
         <div className="search-input">
           <input type="text" placeholder="Digite o nome do módulo..." />
