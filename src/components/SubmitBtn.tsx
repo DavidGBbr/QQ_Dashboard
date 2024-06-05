@@ -4,7 +4,7 @@ import "../styles/form.css";
 
 export function SubmitBtn({ children }: PropsWithChildren) {
   const status = useFormStatus();
-  console.log(status.pending);
+  //console.log(status.pending);
   return (
     <button type="submit" disabled={status.pending} className="button-orange">
       {children}
