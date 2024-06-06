@@ -5,6 +5,7 @@ import ListItems from "@/components/ListItems";
 import { FaUser } from "react-icons/fa";
 import RedirectBtn from "@/components/RedirectBtn";
 import { UserType } from "@/types/User";
+import DeleteModal from "@/components/DeleteModal";
 
 const Users = async () => {
   const response = await fetch("http://localhost:3333/user", {
@@ -36,6 +37,7 @@ const Users = async () => {
           <ListItems items={users} ItemIcon={FaUser} />
         </div>
       </main>
+      <DeleteModal></DeleteModal>
     </Sidenav>
   );
 };

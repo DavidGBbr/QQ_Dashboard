@@ -156,13 +156,13 @@ a {
   background-color: #259446;
   color: #fff;
   cursor: pointer;
-  padding: 18px;
+  padding: 1.125rem;
   width: 100%;
   border: none;
   text-align: left;
   outline: none;
   font-size: 15px;
-  transition: 0.4s;
+  transition: 0.5s;
 }
 
 .active,
