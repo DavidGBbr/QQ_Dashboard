@@ -37,12 +37,6 @@ img {
   gap: 0.7rem;
 }
 
-.list-items div {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
 .list-items li {
   display: flex;
   align-items: center;
@@ -71,4 +65,30 @@ img {
 
 .list-items button:hover {
   color: #fba931;
+}
+
+.icon-name-container {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.name-email-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.action-btn-container {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+@media (max-width: 767px) {
+  .list-items li {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 100%;
+  }
 }

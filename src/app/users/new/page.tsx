@@ -1,18 +1,21 @@
+"use client";
 import React from "react";
 import "../../../styles/form.css";
 import Sidenav from "@/components/Sidenav";
+import RedirectBtn from "@/components/RedirectBtn";
+import { createUser } from "@/actions/CreateUser";
 
 const CreateUserPage = () => {
   return (
     <Sidenav>
       <main className="container">
         <div className="page-header">
-          <button className="button-green">{"< Voltar"}</button>
+          <RedirectBtn path="/users">{"< Voltar"}</RedirectBtn>
           <h2>Criar usuário</h2>
         </div>
 
         <div className="form-wrapper">
-          <form action="" className="form-container">
+          <form action={createUser} className="form-container">
             <label htmlFor="username">
               <span>Nome do usuário:</span>
               <input

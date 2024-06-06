@@ -1,10 +1,9 @@
 import React from "react";
 import { IconType } from "react-icons";
-
 import { FaGear, FaTrashCan } from "react-icons/fa6";
 
 interface User {
-  id: number;
+  id: string | number;
   name: string;
   email?: string | null;
   profile?: string | null;
@@ -20,13 +19,15 @@ const ListItems: React.FC<ListItemsProps> = ({ items, ItemIcon }) => {
     <ul className="list-items">
       {items.map((item) => (
         <li key={item.id}>
-          <div>
+          <div className="icon-name-container">
             <ItemIcon size={30} />
-            <strong>{item.name}</strong>
+            <div className="name-email-container">
+              <strong>{item.name}</strong>
+              <p>{item.email}</p>
+            </div>
           </div>
-          <p>{item.email}</p>
           <p>{item.profile}</p>
-          <div>
+          <div className="action-btn-container">
             <button>
               <FaGear size={30} />
             </button>
