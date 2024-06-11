@@ -193,3 +193,25 @@ a {
 .panel span {
   white-space: nowrap;
 }
+
+.radio-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.radio-container label {
+  display: flex;
+  flex-direction: row;
+  flex: 0;
+}
+
+.radio-container input[type="radio"] {
+  outline: none;
+  font: inherit;
+  accent-color: #fba931;
+}
+
+.radio-container span {
+  margin: 0 0 0 0.3rem;
+}

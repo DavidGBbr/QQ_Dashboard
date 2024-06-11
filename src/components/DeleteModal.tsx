@@ -5,7 +5,7 @@ import { FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
 const DeleteModal = () => {
-  if (true) {
+  if (false) {
     return (
       <div className="modal-bg">
         <div className="modal">
