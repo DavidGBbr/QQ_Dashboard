@@ -1,5 +1,4 @@
 import ListItems from "@/components/ListItems";
-import Sidenav from "@/components/Sidenav";
 import React from "react";
 import "../../styles/form.css";
 import { MdOutlineViewModule } from "react-icons/md";
@@ -18,21 +17,19 @@ const Modules = async () => {
   }));
 
   return (
-    <Sidenav>
-      <main className="container">
-        <div className="page-header">
-          <h2>Módulos</h2>
-          <RedirectBtn path="modules/new">Registrar</RedirectBtn>
-        </div>
-        <div className="search-input">
-          <input type="text" placeholder="Digite o nome do módulo..." />
-          <button className="button-green">Filtrar</button>
-        </div>
-        <div>
-          <ListItems items={modules} ItemIcon={MdOutlineViewModule} />
-        </div>
-      </main>
-    </Sidenav>
+    <main className="container">
+      <div className="page-header">
+        <h2>Módulos</h2>
+        <RedirectBtn path="modules/new">Registrar</RedirectBtn>
+      </div>
+      <div className="search-input">
+        <input type="text" placeholder="Digite o nome do módulo..." />
+        <button className="button-green">Filtrar</button>
+      </div>
+      <div>
+        <ListItems items={modules} ItemIcon={MdOutlineViewModule} />
+      </div>
+    </main>
   );
 };
 

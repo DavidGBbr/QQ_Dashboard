@@ -1,5 +1,4 @@
 import ListItems from "@/components/ListItems";
-import Sidenav from "@/components/Sidenav";
 import React from "react";
 import "../../styles/form.css";
 import { MdReceiptLong } from "react-icons/md";
@@ -24,21 +23,19 @@ const Functions = () => {
     },
   ];
   return (
-    <Sidenav>
-      <main className="container">
-        <div className="page-header">
-          <h2>Funções</h2>
-          <button className="button-green">Registrar</button>
-        </div>
-        <div className="search-input">
-          <input type="text" placeholder="Digite o nome da função..." />
-          <button className="button-green">Filtrar</button>
-        </div>
-        <div>
-          <ListItems items={functions} ItemIcon={MdReceiptLong} />
-        </div>
-      </main>
-    </Sidenav>
+    <main className="container">
+      <div className="page-header">
+        <h2>Funções</h2>
+        <button className="button-green">Registrar</button>
+      </div>
+      <div className="search-input">
+        <input type="text" placeholder="Digite o nome da função..." />
+        <button className="button-green">Filtrar</button>
+      </div>
+      <div>
+        <ListItems items={functions} ItemIcon={MdReceiptLong} />
+      </div>
+    </main>
   );
 };
 

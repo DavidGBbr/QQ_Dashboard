@@ -1,4 +1,3 @@
-import Sidenav from "@/components/Sidenav";
 import React from "react";
 import "../../styles/form.css";
 import ListItems from "@/components/ListItems";
@@ -23,7 +22,7 @@ const Users = async () => {
   });
 
   return (
-    <Sidenav>
+    <>
       <main className="container">
         <div className="page-header">
           <h2>Usuários</h2>
@@ -38,7 +37,7 @@ const Users = async () => {
         </div>
       </main>
       <DeleteModal></DeleteModal>
-    </Sidenav>
+    </>
   );
 };
 

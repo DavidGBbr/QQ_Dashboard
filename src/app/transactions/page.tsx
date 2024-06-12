@@ -1,5 +1,4 @@
 import ListItems from "@/components/ListItems";
-import Sidenav from "@/components/Sidenav";
 import React from "react";
 import "../../styles/form.css";
 import { MdOutlineWindow } from "react-icons/md";
@@ -17,21 +16,19 @@ const Transactions = async () => {
   }));
 
   return (
-    <Sidenav>
-      <main className="container">
-        <div className="page-header">
-          <h2>Transações</h2>
-          <button className="button-green">Registrar</button>
-        </div>
-        <div className="search-input">
-          <input type="text" placeholder="Digite o nome da transação..." />
-          <button className="button-green">Filtrar</button>
-        </div>
-        <div>
-          <ListItems items={transactions} ItemIcon={MdOutlineWindow} />
-        </div>
-      </main>
-    </Sidenav>
+    <main className="container">
+      <div className="page-header">
+        <h2>Transações</h2>
+        <button className="button-green">Registrar</button>
+      </div>
+      <div className="search-input">
+        <input type="text" placeholder="Digite o nome da transação..." />
+        <button className="button-green">Filtrar</button>
+      </div>
+      <div>
+        <ListItems items={transactions} ItemIcon={MdOutlineWindow} />
+      </div>
+    </main>
   );
 };
 
