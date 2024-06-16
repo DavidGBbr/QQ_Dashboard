@@ -17,6 +17,11 @@ export async function createUser(formData: FormData) {
     },
   });
 
+  if (!response.ok) {
+    console.error("Failed to create a user");
+    return;
+  }
+
   await response.json();
   redirect("/users");
 }

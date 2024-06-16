@@ -7,16 +7,10 @@ import { ItemType } from "@/types/Item";
 interface ListItemsProps {
   items: ItemType[];
   ItemIcon: IconType;
-  updatePath: string;
   onDelete: (item: ItemType) => void;
 }
 
-const ListItems: React.FC<ListItemsProps> = ({
-  items,
-  ItemIcon,
-  updatePath,
-  onDelete,
-}) => {
+const ListItems: React.FC<ListItemsProps> = ({ items, ItemIcon, onDelete }) => {
   return (
     <ul className="list-items">
       {items.map((item) => (
@@ -30,7 +24,7 @@ const ListItems: React.FC<ListItemsProps> = ({
           </div>
           <p>{item.profile}</p>
           <div className="action-btn-container">
-            <UpdateBtn path="users/update" />
+            <UpdateBtn id={item.id} />
             <DeleteBtn onDelete={() => onDelete(item)} />
           </div>
         </li>

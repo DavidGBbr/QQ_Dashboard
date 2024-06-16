@@ -1,36 +1,63 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { ProfileType } from "@/types/Profile";
 import React, { useEffect, useState } from "react";
+import { updateUser } from "@/actions/UpdateUser";
 
-const UpdateUserForm = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
+type UpdateUserProps = {
+  data:
+    | {
+        userId: number;
+        name: string;
+        email: string;
+        profileId: number;
+      }
+    | undefined;
+};
+
+const UpdateUserForm = ({ data }: UpdateUserProps) => {
+  const router = useRouter();
+  const [username, setUsername] = useState(data?.name || "");
+  const [email, setEmail] = useState(data?.email || "");
   const [profiles, setProfiles] = useState<ProfileType[]>([]);
-  const [profile, setProfile] = useState<ProfileType | null>(null);
+  const [selectedProfileId, setSelectedProfileId] = useState<
+    number | undefined
+  >(data?.profileId);
 
   useEffect(() => {
     const getProfiles = async () => {
       const response = await fetch("http://localhost:3333/profile");
-      const data = await response.json();
-      const profiles = data.map((profile: ProfileType) => ({
-        profileId: profile.profileId,
-        name: profile.name,
-      }));
-      setProfiles(profiles);
+      const profilesData = await response.json();
+      setProfiles(profilesData);
     };
 
     getProfiles();
   }, []);
 
   useEffect(() => {
-    if (profiles.length > 0) {
-      setProfile(profiles[0]);
+    if (profiles.length > 0 && data?.profileId) {
+      const userProfile = profiles.find((p) => p.profileId === data.profileId);
+      setSelectedProfileId(userProfile?.profileId);
     }
-  }, [profiles]);
+  }, [profiles, data]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const user = {
+      userId: data?.userId || 0,
+      name: username,
+      email: email,
+      profileId: selectedProfileId || 0,
+    };
+    const result = await updateUser(user);
+    if (result.success) {
+      router.push("/users");
+    }
+  };
 
   return (
     <div className="form-wrapper">
-      <form className="form-container">
+      <form className="form-container" onSubmit={handleSubmit}>
         <label htmlFor="username">
           <span>Nome do usuário:</span>
           <input
@@ -62,8 +89,8 @@ const UpdateUserForm = () => {
                   type="radio"
                   name="profile"
                   value={p.profileId}
-                  checked={profile?.profileId === p.profileId}
-                  onChange={() => setProfile(p)}
+                  checked={selectedProfileId === p.profileId}
+                  onChange={() => setSelectedProfileId(p.profileId)}
                 />
                 <span>{p.name}</span>
               </label>

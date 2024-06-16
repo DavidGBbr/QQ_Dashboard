@@ -5,7 +5,7 @@ import RedirectBtn from "@/components/RedirectBtn";
 import { ItemType } from "@/types/Item";
 import { UserType } from "@/types/User";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
 
 type UserProps = {
@@ -13,14 +13,14 @@ type UserProps = {
 };
 
 const ListUsersForm = ({ data }: UserProps) => {
-  const users = data.map((user) => {
-    return {
+  const [users, setUsers] = useState<ItemType[]>(
+    data.map((user) => ({
       id: user.userId,
       name: user.name,
       email: user.email,
       profile: user.profile.name,
-    };
-  });
+    }))
+  );
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<ItemType | null>(null);
@@ -44,7 +44,16 @@ const ListUsersForm = ({ data }: UserProps) => {
           method: "DELETE",
         });
         handleCloseModal();
-        router.push("/users");
+        const response = await fetch("http://localhost:3333/user");
+        const data = (await response.json()) as UserType[];
+        setUsers(
+          data.map((user) => ({
+            id: user.userId,
+            name: user.name,
+            email: user.email,
+            profile: user.profile.name,
+          }))
+        );
       } catch (error) {
         console.error("Failed to delete the user:", error);
       }
@@ -66,7 +75,6 @@ const ListUsersForm = ({ data }: UserProps) => {
           <ListItems
             items={users}
             ItemIcon={FaUser}
-            updatePath="users/update"
             onDelete={handleDeleteClick}
           />
         </div>

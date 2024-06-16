@@ -9,11 +9,7 @@ const Users = async () => {
   });
   const data = (await response.json()) as UserType[];
 
-  return (
-    <>
-      <ListUsersForm data={data} />
-    </>
-  );
+  return <ListUsersForm data={data} />;
 };
 
 export default Users;
