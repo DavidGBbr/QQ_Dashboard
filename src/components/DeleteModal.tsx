@@ -4,38 +4,61 @@ import "../styles/modal.css";
 import { FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
-const DeleteModal = () => {
-  if (false) {
-    return (
-      <div className="modal-bg">
-        <div className="modal">
-          <div className="modal-container">
-            <div className="modal-header">
-              <span>Deseja excluir o usuário?</span>
-              <button>
-                <IoClose size={30} />
-              </button>
-            </div>
-            <div className="modal-content">
-              <ul>
-                <li>
-                  <FaUser size={30} />
-                  <span>Jorge Bastos</span>
-                </li>
-                <li>
-                  <MdEmail size={30} />
-                  <span>jorgebastos@gmail.com</span>
-                </li>
-              </ul>
-            </div>
-            <div className="modal-footer">
-              <button className="button-red">Excluir usuário</button>
-            </div>
+interface DeleteModalProps {
+  title: string;
+  btnText: string;
+  isOpen: boolean;
+  onClose: () => void;
+  onDelete: () => void;
+  item: {
+    id: number;
+    name: string;
+    email?: string;
+    profile?: string;
+  } | null;
+}
+
+const DeleteModal: React.FC<DeleteModalProps> = ({
+  title,
+  btnText,
+  isOpen,
+  onClose,
+  onDelete,
+  item,
+}) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-bg">
+      <div className="modal">
+        <div className="modal-container">
+          <div className="modal-header">
+            <span>{title}</span>
+            <button onClick={onClose}>
+              <IoClose size={30} />
+            </button>
+          </div>
+          <div className="modal-content">
+            <ul>
+              <li>
+                <FaUser size={30} />
+                <span>{item?.name}</span>
+              </li>
+              <li>
+                <MdEmail size={30} />
+                <span>{item?.email}</span>
+              </li>
+            </ul>
+          </div>
+          <div className="modal-footer">
+            <button className="button-red" onClick={onDelete}>
+              {btnText}
+            </button>
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 };
 
 export default DeleteModal;

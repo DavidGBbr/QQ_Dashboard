@@ -8,8 +8,6 @@ const Transactions = async () => {
   const response = await fetch("http://localhost:3333/transaction");
   const data = (await response.json()) as ModuleTransactionType[];
 
-  console.log(data);
-
   const transactions = data.map((item) => ({
     id: item.moduleId,
     name: `${item.transactionName} - (${item.moduleName})`,

@@ -1,20 +1,22 @@
 import React from "react";
 import { IconType } from "react-icons";
-import { FaGear, FaTrashCan } from "react-icons/fa6";
-
-interface User {
-  id: string | number;
-  name: string;
-  email?: string | null;
-  profile?: string | null;
-}
+import UpdateBtn from "./UpdateBtn";
+import DeleteBtn from "./DeleteBtn";
+import { ItemType } from "@/types/Item";
 
 interface ListItemsProps {
-  items: User[];
+  items: ItemType[];
   ItemIcon: IconType;
+  updatePath: string;
+  onDelete: (item: ItemType) => void;
 }
 
-const ListItems: React.FC<ListItemsProps> = ({ items, ItemIcon }) => {
+const ListItems: React.FC<ListItemsProps> = ({
+  items,
+  ItemIcon,
+  updatePath,
+  onDelete,
+}) => {
   return (
     <ul className="list-items">
       {items.map((item) => (
@@ -28,12 +30,8 @@ const ListItems: React.FC<ListItemsProps> = ({ items, ItemIcon }) => {
           </div>
           <p>{item.profile}</p>
           <div className="action-btn-container">
-            <button>
-              <FaGear size={30} />
-            </button>
-            <button>
-              <FaTrashCan size={30} />
-            </button>
+            <UpdateBtn path="users/update" />
+            <DeleteBtn onDelete={() => onDelete(item)} />
           </div>
         </li>
       ))}

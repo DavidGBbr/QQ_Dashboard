@@ -1,9 +1,7 @@
-"use client";
 import React from "react";
 import "../../../styles/form.css";
 import RedirectBtn from "@/components/RedirectBtn";
-import { createModule } from "@/actions/CreateModule";
-import { SubmitBtn } from "@/components/SubmitBtn";
+import CreateModuleForm from "@/components/forms/modules/CreateModuleForm";
 
 const CreateModulePage = () => {
   return (
@@ -13,20 +11,7 @@ const CreateModulePage = () => {
         <h2>Criar módulo</h2>
       </div>
 
-      <div className="form-wrapper">
-        <form action={createModule} className="form-container">
-          <label htmlFor="nameModule">
-            <span>Nome do módulo:</span>
-            <input
-              type="text"
-              name="nameModule"
-              id="nameModule"
-              placeholder="Digite o nome do módulo..."
-            />
-          </label>
-          <SubmitBtn>Criar módulo</SubmitBtn>
-        </form>
-      </div>
+      <CreateModuleForm />
     </main>
   );
 };

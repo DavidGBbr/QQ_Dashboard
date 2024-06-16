@@ -37,37 +37,37 @@ const Sidenav = ({ children }: PropsWithChildren) => {
           </button>
           <ul>
             <li>
-              <Link href="/users">
+              <Link href="/users" prefetch={true}>
                 <FaUser size={30} />
                 <span>Usuários</span>
               </Link>
             </li>
             <li>
-              <Link href="/profiles">
+              <Link href="/profiles" prefetch={true}>
                 <FaUserCog size={30} />
                 <span>Perfis</span>
               </Link>
             </li>
             <li>
-              <Link href="/modules">
+              <Link href="/modules" prefetch={true}>
                 <MdOutlineViewModule size={30} />
                 <span>Módulos</span>
               </Link>
             </li>
             <li>
-              <Link href="/transactions">
+              <Link href="/transactions" prefetch={true}>
                 <MdOutlineWindow size={30} />
                 <span>Transações</span>
               </Link>
             </li>
             <li>
-              <Link href="/functions">
+              <Link href="/functions" prefetch={true}>
                 <MdReceiptLong size={30} />
                 <span>Funções</span>
               </Link>
             </li>
             <li>
-              <Link href="/logout">
+              <Link href="/logout" prefetch={true}>
                 <CiLogout size={30} />
                 <span>Sair</span>
               </Link>
