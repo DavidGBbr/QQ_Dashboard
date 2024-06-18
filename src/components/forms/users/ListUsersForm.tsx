@@ -76,6 +76,7 @@ const ListUsersForm = ({ data }: UserProps) => {
             items={users}
             ItemIcon={FaUser}
             onDelete={handleDeleteClick}
+            updatePath={"users/update"}
           />
         </div>
       </main>
@@ -84,6 +85,7 @@ const ListUsersForm = ({ data }: UserProps) => {
         btnText="Excluir o usuário"
         isOpen={isModalOpen}
         onClose={handleCloseModal}
+        icon={FaUser}
         item={selectedUser ? selectedUser : null}
         onDelete={handleDeleteUser}
       />

@@ -8,9 +8,15 @@ interface ListItemsProps {
   items: ItemType[];
   ItemIcon: IconType;
   onDelete: (item: ItemType) => void;
+  updatePath: string;
 }
 
-const ListItems: React.FC<ListItemsProps> = ({ items, ItemIcon, onDelete }) => {
+const ListItems: React.FC<ListItemsProps> = ({
+  items,
+  ItemIcon,
+  onDelete,
+  updatePath,
+}) => {
   return (
     <ul className="list-items">
       {items.map((item) => (
@@ -24,7 +30,7 @@ const ListItems: React.FC<ListItemsProps> = ({ items, ItemIcon, onDelete }) => {
           </div>
           <p>{item.profile}</p>
           <div className="action-btn-container">
-            <UpdateBtn id={item.id} />
+            <UpdateBtn path={`/${updatePath}/${item.id}`} />
             <DeleteBtn onDelete={() => onDelete(item)} />
           </div>
         </li>

@@ -1,9 +1,7 @@
-import ListItems from "@/components/ListItems";
 import React from "react";
-import "../../styles/form.css";
-import { MdOutlineViewModule } from "react-icons/md";
+import "@/styles/form.css";
 import { ModuleType } from "@/types/Module";
-import RedirectBtn from "@/components/RedirectBtn";
+import ListModulesForm from "@/components/forms/modules/ListModulesForm";
 
 const Modules = async () => {
   const response = await fetch("http://localhost:3333/module", {
@@ -11,26 +9,7 @@ const Modules = async () => {
   });
   const data = (await response.json()) as ModuleType[];
 
-  const modules = data.map((item) => ({
-    id: item.moduleId,
-    name: item.name,
-  }));
-
-  return (
-    <main className="container">
-      <div className="page-header">
-        <h2>Módulos</h2>
-        <RedirectBtn path="modules/new">Registrar</RedirectBtn>
-      </div>
-      <div className="search-input">
-        <input type="text" placeholder="Digite o nome do módulo..." />
-        <button className="button-green">Filtrar</button>
-      </div>
-      <div>
-        <ListItems items={modules} ItemIcon={MdOutlineViewModule} />
-      </div>
-    </main>
-  );
+  return <ListModulesForm data={data} />;
 };
 
 export default Modules;

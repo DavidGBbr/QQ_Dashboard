@@ -2,7 +2,6 @@
 import React from "react";
 import "../../../styles/form.css";
 import RedirectBtn from "@/components/RedirectBtn";
-import { createUser } from "@/actions/CreateUser";
 import CreateUserForm from "@/components/forms/users/CreateUserForm";
 
 const CreateUserPage = () => {

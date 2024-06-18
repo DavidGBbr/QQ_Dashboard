@@ -4,13 +4,13 @@ import { FaGear } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 
 type Props = {
-  id: string | number;
+  path: string;
 };
 
-const UpdateBtn = ({ id }: Props) => {
+const UpdateBtn = ({ path }: Props) => {
   const router = useRouter();
   return (
-    <button onClick={() => router.push(`/users/update/${id}`)}>
+    <button onClick={() => router.push(path)}>
       <FaGear size={30} />
     </button>
   );

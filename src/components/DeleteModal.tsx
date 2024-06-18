@@ -10,6 +10,7 @@ interface DeleteModalProps {
   isOpen: boolean;
   onClose: () => void;
   onDelete: () => void;
+  icon: React.ComponentType<{ size?: number }>;
   item: {
     id: number;
     name: string;
@@ -24,6 +25,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({
   isOpen,
   onClose,
   onDelete,
+  icon: Icon,
   item,
 }) => {
   if (!isOpen) return null;
@@ -41,13 +43,16 @@ const DeleteModal: React.FC<DeleteModalProps> = ({
           <div className="modal-content">
             <ul>
               <li>
-                <FaUser size={30} />
+                <Icon size={30} />
                 <span>{item?.name}</span>
               </li>
-              <li>
-                <MdEmail size={30} />
-                <span>{item?.email}</span>
-              </li>
+
+              {item?.email && (
+                <li>
+                  <MdEmail size={30} />
+                  <span>{item?.email}</span>
+                </li>
+              )}
             </ul>
           </div>
           <div className="modal-footer">
