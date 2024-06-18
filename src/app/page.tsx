@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import "../styles/form.css";
+import "@/styles/form.css";
 import { authUser } from "@/actions/AuthUser";
 import { SubmitBtn } from "@/components/SubmitBtn";
 

@@ -1,6 +1,6 @@
 import React from "react";
-import "../../styles/form.css";
-import "../../styles/forget.css";
+import "@/styles/form.css";
+import "@/styles/forget.css";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

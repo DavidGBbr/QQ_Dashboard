@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import "../../../styles/form.css";
+import "@/styles/form.css";
 import RedirectBtn from "@/components/RedirectBtn";
 import CreateUserForm from "@/components/forms/users/CreateUserForm";
 

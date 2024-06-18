@@ -1,5 +1,5 @@
 import React from "react";
-import "../../styles/form.css";
+import "@/styles/form.css";
 import ListTransactionsForm from "@/components/forms/transactions/ListTransactionsForm";
 import { TransactionType } from "@/types/Transaction";
 

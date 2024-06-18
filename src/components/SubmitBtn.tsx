@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 import { useFormStatus } from "react-dom";
-import "../styles/form.css";
+import "@/styles/form.css";
 
 export function SubmitBtn({ children }: PropsWithChildren) {
   const status = useFormStatus();

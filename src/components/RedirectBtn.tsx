@@ -1,6 +1,6 @@
 "use client";
 import React, { PropsWithChildren } from "react";
-import "../styles/form.css";
+import "@/styles/form.css";
 import { useRouter } from "next/navigation";
 
 type ButtonProps = PropsWithChildren<{
