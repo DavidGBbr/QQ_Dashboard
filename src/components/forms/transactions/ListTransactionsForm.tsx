@@ -33,8 +33,28 @@ const ListTransactionsForm = ({ data }: TransactionProps) => {
     setSelectedTransaction(null);
   };
 
-  const handleDeleteTransaction = () => {
-    alert("Delete transaction");
+  const handleDeleteTransaction = async () => {
+    if (selectedTransaction) {
+      try {
+        await fetch(
+          `http://localhost:3333/transaction/${selectedTransaction.id}`,
+          {
+            method: "DELETE",
+          }
+        );
+        handleCloseModal();
+        const response = await fetch("http://localhost:3333/transaction");
+        const data = (await response.json()) as TransactionType[];
+        setTransactions(
+          data.map((transaction) => ({
+            id: transaction.transactionId,
+            name: `${transaction.transactionName} - ${transaction.moduleName}`,
+          }))
+        );
+      } catch (error) {
+        console.error("Failed to delete the transaction:", error);
+      }
+    }
   };
 
   return (
