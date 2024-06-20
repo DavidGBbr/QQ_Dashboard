@@ -1,6 +1,7 @@
 "use client";
 import DeleteModal from "@/components/DeleteModal";
 import ListItems from "@/components/ListItems";
+import RedirectBtn from "@/components/RedirectBtn";
 import { FunctionType } from "@/types/Function";
 import { ItemType } from "@/types/Item";
 import { useState } from "react";
@@ -42,7 +43,7 @@ const ListFunctionsForm = ({ data }: FunctionProps) => {
       <main className="container">
         <div className="page-header">
           <h2>Funções</h2>
-          <button className="button-green">Registrar</button>
+          <RedirectBtn path="/functions/new">Registrar</RedirectBtn>
         </div>
         <div className="search-input">
           <input type="text" placeholder="Digite o nome da função..." />
