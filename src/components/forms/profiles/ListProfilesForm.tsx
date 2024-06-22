@@ -1,6 +1,7 @@
 "use client";
 import DeleteModal from "@/components/DeleteModal";
 import ListItems from "@/components/ListItems";
+import RedirectBtn from "@/components/RedirectBtn";
 import { ItemType } from "@/types/Item";
 import { ProfileType } from "@/types/Profile";
 import { useState } from "react";
@@ -40,7 +41,7 @@ const ListProfilesForm = ({ data }: ProfileProps) => {
       <main className="container">
         <div className="page-header">
           <h2>Perfis</h2>
-          <button className="button-green">Registrar</button>
+          <RedirectBtn path="profiles/new">Registrar</RedirectBtn>
         </div>
         <div className="search-input">
           <input type="text" placeholder="Digite o nome do perfil..." />
