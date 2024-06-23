@@ -1,5 +1,5 @@
 "use client";
-import { createModule } from "@/actions/CreateModule";
+import { createModule } from "@/actions/modules/CreateModule";
 import { SubmitBtn } from "@/components/SubmitBtn";
 import React from "react";
 

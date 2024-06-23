@@ -1,13 +1,24 @@
 "use client";
-import { createFunction } from "@/actions/functions/CreateFunction";
+import { updateFunction } from "@/actions/functions/UpdateFunction";
 import { TransactionType } from "@/types/Transaction";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-const CreateFunctionForm = () => {
+export type UpdateFunctionProps = {
+  data: {
+    functionId: number;
+    name: string;
+    transactionId: number;
+    transaction: TransactionType;
+  };
+};
+
+const UpdateFunctionForm = ({ data }: UpdateFunctionProps) => {
   const [transactions, setTransactions] = useState<TransactionType[]>([]);
-  const [selectedTransaction, setSelectedTransaction] = useState<string>("");
-  const [functionName, setFunctionName] = useState<string>("");
+  const [selectedTransaction, setSelectedTransaction] = useState<string>(
+    "data.transactionId.toString()"
+  );
+  const [functionName, setFunctionName] = useState<string>(data.name || "");
   const router = useRouter();
 
   useEffect(() => {
@@ -15,6 +26,7 @@ const CreateFunctionForm = () => {
       const response = await fetch("http://localhost:3333/transaction");
       const transactionsData = await response.json();
       setTransactions(transactionsData);
+      console.log(transactionsData);
     };
     getTransactions();
   }, []);
@@ -22,7 +34,9 @@ const CreateFunctionForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    await createFunction(formData);
+    formData.append("functionId", data.functionId.toString());
+    formData.append("transactionId", selectedTransaction);
+    await updateFunction(formData);
     router.push("/functions");
   };
 
@@ -32,7 +46,7 @@ const CreateFunctionForm = () => {
         <label htmlFor="transaction">
           <span>Nome da transação:</span>
           <select
-            name="transaction"
+            name="transactionId"
             id="transaction"
             value={selectedTransaction}
             onChange={(e) => setSelectedTransaction(e.target.value)}
@@ -62,11 +76,11 @@ const CreateFunctionForm = () => {
           />
         </label>
         <button type="submit" className="button-orange">
-          Criar transação
+          Atualizar função
         </button>
       </form>
     </div>
   );
 };
 
-export default CreateFunctionForm;
+export default UpdateFunctionForm;

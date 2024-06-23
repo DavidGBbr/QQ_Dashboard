@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { ProfileType } from "@/types/Profile";
 import React, { useEffect, useState } from "react";
-import { updateUser } from "@/actions/UpdateUser";
+import { updateUser } from "@/actions/users/UpdateUser";
 
 type UpdateUserProps = {
   data:

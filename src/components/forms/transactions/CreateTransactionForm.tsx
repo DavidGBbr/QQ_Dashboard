@@ -1,5 +1,5 @@
 "use client";
-import { createTransaction } from "@/actions/CreateTransaction";
+import { createTransaction } from "@/actions/transactions/CreateTransaction";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 

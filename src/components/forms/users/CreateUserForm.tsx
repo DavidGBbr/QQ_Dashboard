@@ -1,5 +1,5 @@
 "use client";
-import { createUser } from "@/actions/CreateUser";
+import { createUser } from "@/actions/users/CreateUser";
 import React from "react";
 
 const CreateUserForm = () => {

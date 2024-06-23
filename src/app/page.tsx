@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import "@/styles/form.css";
-import { authUser } from "@/actions/AuthUser";
+import { authUser } from "@/actions/users/AuthUser";
 import { SubmitBtn } from "@/components/SubmitBtn";
 
 const Login = () => {

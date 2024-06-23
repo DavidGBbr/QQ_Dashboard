@@ -5,7 +5,7 @@ import RedirectBtn from "@/components/RedirectBtn";
 import { ItemType } from "@/types/Item";
 import { UserType } from "@/types/User";
 import { useRouter } from "next/navigation";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FaUser } from "react-icons/fa";
 
 type UserProps = {

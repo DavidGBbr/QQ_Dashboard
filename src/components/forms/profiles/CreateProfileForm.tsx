@@ -1,5 +1,5 @@
 "use client";
-import { createProfile } from "@/actions/CreateProfile";
+import { createProfile } from "@/actions/profiles/CreateProfile";
 import { ModuleType } from "@/types/Module";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
