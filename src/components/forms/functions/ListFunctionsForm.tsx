@@ -34,8 +34,25 @@ const ListFunctionsForm = ({ data }: FunctionProps) => {
     setSelectedFunction(null);
   };
 
-  const handleDeleteFunction = () => {
-    alert("Delete function");
+  const handleDeleteFunction = async () => {
+    if (selectedFunction) {
+      try {
+        await fetch(`http://localhost:3333/function/${selectedFunction.id}`, {
+          method: "DELETE",
+        });
+        handleCloseModal();
+        const response = await fetch("http://localhost:3333/function");
+        const data = (await response.json()) as FunctionType[];
+        setFunctions(
+          data.map((_function) => ({
+            id: _function.functionId,
+            name: `${_function.functionName} - ${_function.transactionName}`,
+          }))
+        );
+      } catch (error) {
+        console.error("Failed to delete the function:", error);
+      }
+    }
   };
 
   return (
