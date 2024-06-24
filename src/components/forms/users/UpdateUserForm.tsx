@@ -82,20 +82,21 @@ const UpdateUserForm = ({ data }: UpdateUserProps) => {
         </label>
         <label htmlFor="profile">
           <span>Perfil:</span>
-          <div className="radio-container">
+          <select
+            name="profile"
+            id="profile"
+            value={selectedProfileId}
+            onChange={(e) => setSelectedProfileId(Number(e.target.value))}
+          >
+            <option value="" disabled>
+              Selecione um perfil
+            </option>
             {profiles.map((p) => (
-              <label key={p.profileId}>
-                <input
-                  type="radio"
-                  name="profile"
-                  value={p.profileId}
-                  checked={selectedProfileId === p.profileId}
-                  onChange={() => setSelectedProfileId(p.profileId)}
-                />
-                <span>{p.name}</span>
-              </label>
+              <option key={p.profileId} value={p.profileId}>
+                {p.name}
+              </option>
             ))}
-          </div>
+          </select>
         </label>
         <button type="submit" className="button-orange">
           Editar usuário
