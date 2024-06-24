@@ -1,10 +1,10 @@
 "use client";
 import DeleteModal from "@/components/DeleteModal";
+import ItemSearchBar from "@/components/ItemSearchBar";
 import ListItems from "@/components/ListItems";
-import RedirectBtn from "@/components/RedirectBtn";
 import { ItemType } from "@/types/Item";
 import { ProfileType } from "@/types/Profile";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaUserCog } from "react-icons/fa";
 
 type ProfileProps = {
@@ -18,7 +18,8 @@ const ListProfilesForm = ({ data }: ProfileProps) => {
       name: profile.name,
     }))
   );
-
+  const [filteredProfiles, setFilteredProfiles] =
+    useState<ItemType[]>(profiles);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProfile, setSelectedProfile] = useState<ItemType | null>(null);
 
@@ -36,20 +37,29 @@ const ListProfilesForm = ({ data }: ProfileProps) => {
     alert("Delete profile");
   };
 
+  const handleSearch = (searchTerm: string) => {
+    const filtered = profiles.filter((profile) =>
+      profile.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredProfiles(filtered);
+  };
+
+  useEffect(() => {
+    setFilteredProfiles(profiles);
+  }, [profiles]);
+
   return (
     <>
       <main className="container">
-        <div className="page-header">
-          <h2>Perfis</h2>
-          <RedirectBtn path="profiles/new">Registrar</RedirectBtn>
-        </div>
-        <div className="search-input">
-          <input type="text" placeholder="Digite o nome do perfil..." />
-          <button className="button-green">Filtrar</button>
-        </div>
+        <ItemSearchBar
+          title="Perfis"
+          redirectPath="profiles/new"
+          inputPlaceholder="Digite o nome do perfil..."
+          onSearch={handleSearch}
+        />
         <div>
           <ListItems
-            items={profiles}
+            items={filteredProfiles}
             ItemIcon={FaUserCog}
             onDelete={handleDeleteClick}
             updatePath={"profiles/update"}

@@ -1,10 +1,10 @@
 "use client";
 import DeleteModal from "@/components/DeleteModal";
+import ItemSearchBar from "@/components/ItemSearchBar";
 import ListItems from "@/components/ListItems";
-import RedirectBtn from "@/components/RedirectBtn";
 import { ItemType } from "@/types/Item";
 import { TransactionType } from "@/types/Transaction";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MdOutlineWindow } from "react-icons/md";
 
 type TransactionProps = {
@@ -18,7 +18,8 @@ const ListTransactionsForm = ({ data }: TransactionProps) => {
       name: `${transaction.transactionName} - ${transaction.moduleName}`,
     }))
   );
-
+  const [filteredTransactions, setFilteredTransactions] =
+    useState<ItemType[]>(transactions);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] =
     useState<ItemType | null>(null);
@@ -45,32 +46,42 @@ const ListTransactionsForm = ({ data }: TransactionProps) => {
         handleCloseModal();
         const response = await fetch("http://localhost:3333/transaction");
         const data = (await response.json()) as TransactionType[];
-        setTransactions(
-          data.map((transaction) => ({
-            id: transaction.transactionId,
-            name: `${transaction.transactionName} - ${transaction.moduleName}`,
-          }))
-        );
+        const updatedTransactions = data.map((transaction) => ({
+          id: transaction.transactionId,
+          name: `${transaction.transactionName} - ${transaction.moduleName}`,
+        }));
+        setTransactions(updatedTransactions);
+        setFilteredTransactions(updatedTransactions);
       } catch (error) {
         console.error("Failed to delete the transaction:", error);
       }
     }
   };
 
+  const handleSearch = (searchTerm: string) => {
+    const filtered = transactions.filter((transaction) =>
+      transaction.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredTransactions(filtered);
+  };
+
+  useEffect(() => {
+    setFilteredTransactions(transactions);
+  }, [transactions]);
+
   return (
     <>
       <main className="container">
-        <div className="page-header">
-          <h2>Transações</h2>
-          <RedirectBtn path="transactions/new">Registrar</RedirectBtn>
-        </div>
-        <div className="search-input">
-          <input type="text" placeholder="Digite o nome da transação..." />
-          <button className="button-green">Filtrar</button>
-        </div>
+        <ItemSearchBar
+          title="Transações"
+          redirectPath="transactions/new"
+          inputPlaceholder="Digite o nome da transação..."
+          onSearch={handleSearch}
+        />
+
         <div>
           <ListItems
-            items={transactions}
+            items={filteredTransactions}
             ItemIcon={MdOutlineWindow}
             onDelete={handleDeleteClick}
             updatePath={"transactions/update"}

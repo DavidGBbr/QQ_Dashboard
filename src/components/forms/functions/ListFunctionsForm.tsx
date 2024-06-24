@@ -1,10 +1,11 @@
 "use client";
 import DeleteModal from "@/components/DeleteModal";
+import ItemSearchBar from "@/components/ItemSearchBar";
 import ListItems from "@/components/ListItems";
 import RedirectBtn from "@/components/RedirectBtn";
 import { FunctionType } from "@/types/Function";
 import { ItemType } from "@/types/Item";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdReceiptLong } from "react-icons/md";
 
 type FunctionProps = {
@@ -18,7 +19,8 @@ const ListFunctionsForm = ({ data }: FunctionProps) => {
       name: `${_function.functionName} - ${_function.transactionName}`,
     }))
   );
-
+  const [filteredFunctions, setFilteredFunctions] =
+    useState<ItemType[]>(functions);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedFunction, setSelectedFunction] = useState<ItemType | null>(
     null
@@ -43,32 +45,41 @@ const ListFunctionsForm = ({ data }: FunctionProps) => {
         handleCloseModal();
         const response = await fetch("http://localhost:3333/function");
         const data = (await response.json()) as FunctionType[];
-        setFunctions(
-          data.map((_function) => ({
-            id: _function.functionId,
-            name: `${_function.functionName} - ${_function.transactionName}`,
-          }))
-        );
+        const updatedFunctions = data.map((_function) => ({
+          id: _function.functionId,
+          name: `${_function.functionName} - ${_function.transactionName}`,
+        }));
+        setFunctions(updatedFunctions);
+        setFilteredFunctions(updatedFunctions);
       } catch (error) {
         console.error("Failed to delete the function:", error);
       }
     }
   };
 
+  const handleSearch = (searchTerm: string) => {
+    const filtered = functions.filter((_function) =>
+      _function.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredFunctions(filtered);
+  };
+
+  useEffect(() => {
+    setFilteredFunctions(functions);
+  }, [functions]);
+
   return (
     <>
       <main className="container">
-        <div className="page-header">
-          <h2>Funções</h2>
-          <RedirectBtn path="/functions/new">Registrar</RedirectBtn>
-        </div>
-        <div className="search-input">
-          <input type="text" placeholder="Digite o nome da função..." />
-          <button className="button-green">Filtrar</button>
-        </div>
+        <ItemSearchBar
+          title="Funções"
+          redirectPath="functions/new"
+          inputPlaceholder="Digite o nome da transação..."
+          onSearch={handleSearch}
+        />
         <div>
           <ListItems
-            items={functions}
+            items={filteredFunctions}
             ItemIcon={MdReceiptLong}
             onDelete={handleDeleteClick}
             updatePath={"functions/update"}

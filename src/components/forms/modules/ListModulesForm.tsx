@@ -1,10 +1,10 @@
 "use client";
 import DeleteModal from "@/components/DeleteModal";
+import ItemSearchBar from "@/components/ItemSearchBar";
 import ListItems from "@/components/ListItems";
-import RedirectBtn from "@/components/RedirectBtn";
 import { ItemType } from "@/types/Item";
 import { ModuleType } from "@/types/Module";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdOutlineViewModule } from "react-icons/md";
 
 type ModuleProps = {
@@ -18,7 +18,7 @@ const ListModulesForm = ({ data }: ModuleProps) => {
       name: module.name,
     }))
   );
-
+  const [filteredModules, setFilteredModules] = useState<ItemType[]>(modules);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedModule, setSelectedModule] = useState<ItemType | null>(null);
 
@@ -36,20 +36,29 @@ const ListModulesForm = ({ data }: ModuleProps) => {
     alert("Delete module");
   };
 
+  const handleSearch = (searchTerm: string) => {
+    const filtered = modules.filter((module) =>
+      module.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredModules(filtered);
+  };
+
+  useEffect(() => {
+    setFilteredModules(modules);
+  }, [modules]);
+
   return (
     <>
       <main className="container">
-        <div className="page-header">
-          <h2>Módulos</h2>
-          <RedirectBtn path="modules/new">Registrar</RedirectBtn>
-        </div>
-        <div className="search-input">
-          <input type="text" placeholder="Digite o nome do módulo..." />
-          <button className="button-green">Filtrar</button>
-        </div>
+        <ItemSearchBar
+          title="Módulos"
+          redirectPath="modules/new"
+          inputPlaceholder="Digite o nome do módulo..."
+          onSearch={handleSearch}
+        />
         <div>
           <ListItems
-            items={modules}
+            items={filteredModules}
             ItemIcon={MdOutlineViewModule}
             onDelete={handleDeleteClick}
             updatePath={"modules/update"}

@@ -1,11 +1,11 @@
 "use client";
 import DeleteModal from "@/components/DeleteModal";
+import ItemSearchBar from "@/components/ItemSearchBar";
 import ListItems from "@/components/ListItems";
-import RedirectBtn from "@/components/RedirectBtn";
 import { ItemType } from "@/types/Item";
 import { UserType } from "@/types/User";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
 
 type UserProps = {
@@ -21,7 +21,7 @@ const ListUsersForm = ({ data }: UserProps) => {
       profile: user.profile.name,
     }))
   );
-
+  const [filteredUsers, setFilteredUsers] = useState<ItemType[]>(users);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<ItemType | null>(null);
 
@@ -46,34 +46,43 @@ const ListUsersForm = ({ data }: UserProps) => {
         handleCloseModal();
         const response = await fetch("http://localhost:3333/user");
         const data = (await response.json()) as UserType[];
-        setUsers(
-          data.map((user) => ({
-            id: user.userId,
-            name: user.name,
-            email: user.email,
-            profile: user.profile.name,
-          }))
-        );
+        const updatedUsers = data.map((user) => ({
+          id: user.userId,
+          name: user.name,
+          email: user.email,
+          profile: user.profile.name,
+        }));
+        setUsers(updatedUsers);
+        setFilteredUsers(updatedUsers);
       } catch (error) {
         console.error("Failed to delete the user:", error);
       }
     }
   };
 
+  const handleSearch = (searchTerm: string) => {
+    const filtered = users.filter((transaction) =>
+      transaction.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredUsers(filtered);
+  };
+
+  useEffect(() => {
+    setFilteredUsers(users);
+  }, [users]);
+
   return (
     <>
       <main className="container">
-        <div className="page-header">
-          <h2>Usuários</h2>
-          <RedirectBtn path="users/new">Registrar</RedirectBtn>
-        </div>
-        <div className="search-input">
-          <input type="text" placeholder="Digite o nome do usuário..." />
-          <button className="button-green">Filtrar</button>
-        </div>
+        <ItemSearchBar
+          title="Usuários"
+          redirectPath="users/new"
+          inputPlaceholder="Digite o nome do usuário..."
+          onSearch={handleSearch}
+        />
         <div>
           <ListItems
-            items={users}
+            items={filteredUsers}
             ItemIcon={FaUser}
             onDelete={handleDeleteClick}
             updatePath={"users/update"}
