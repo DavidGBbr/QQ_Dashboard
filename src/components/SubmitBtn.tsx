@@ -1,12 +1,13 @@
-import { PropsWithChildren } from "react";
-import { useFormStatus } from "react-dom";
 import "@/styles/form.css";
 
-export function SubmitBtn({ children }: PropsWithChildren) {
-  const status = useFormStatus();
-  //console.log(status.pending);
+interface SubmitBtnProps {
+  children: React.ReactNode;
+  disabled?: boolean;
+}
+
+export function SubmitBtn({ children, disabled }: SubmitBtnProps) {
   return (
-    <button type="submit" disabled={status.pending} className="button-orange">
+    <button type="submit" disabled={disabled} className="button-orange">
       {children}
     </button>
   );

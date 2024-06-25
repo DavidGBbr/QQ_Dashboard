@@ -1,5 +1,6 @@
 "use client";
 import { createTransaction } from "@/actions/transactions/CreateTransaction";
+import { SubmitBtn } from "@/components/SubmitBtn";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -62,9 +63,7 @@ const CreateTransactionForm = () => {
             onChange={(e) => setTransactionName(e.target.value)}
           />
         </label>
-        <button type="submit" className="button-orange">
-          Criar transação
-        </button>
+        <SubmitBtn>Criar transação</SubmitBtn>
       </form>
     </div>
   );

@@ -1,5 +1,6 @@
 "use client";
 import { createProfile } from "@/actions/profiles/CreateProfile";
+import { SubmitBtn } from "@/components/SubmitBtn";
 import { ModuleType } from "@/types/Module";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -58,9 +59,7 @@ const CreateProfileForm = () => {
             onChange={(e) => setProfileName(e.target.value)}
           />
         </label>
-        <button type="submit" className="button-orange">
-          Criar perfil
-        </button>
+        <SubmitBtn>Criar perfil</SubmitBtn>
       </form>
     </div>
   );

@@ -1,5 +1,6 @@
 "use client";
 import { createUser } from "@/actions/users/CreateUser";
+import { SubmitBtn } from "@/components/SubmitBtn";
 import React from "react";
 
 const CreateUserForm = () => {
@@ -33,9 +34,7 @@ const CreateUserForm = () => {
             placeholder="Digite a senha do usuário..."
           />
         </label>
-        <button type="submit" className="button-orange">
-          Criar usuário
-        </button>
+        <SubmitBtn>Criar usuário</SubmitBtn>
       </form>
     </div>
   );

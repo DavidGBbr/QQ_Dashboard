@@ -38,6 +38,7 @@ img {
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
+  min-width: 50vw;
 }
 
 .list-items li {
