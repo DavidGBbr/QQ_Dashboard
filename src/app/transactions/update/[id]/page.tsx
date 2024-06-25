@@ -26,7 +26,7 @@ const UpdateTransactionPage = ({ params }: PageParams) => {
     };
 
     getTransaction();
-  }, []);
+  }, [params.id]);
 
   return (
     <main className="container">

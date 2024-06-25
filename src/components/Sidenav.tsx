@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { PropsWithChildren, useState } from "react";
+import React, { PropsWithChildren, useContext, useState } from "react";
 import Image from "next/image";
 import { FaUser, FaUserCog } from "react-icons/fa";
 import {
@@ -12,12 +12,26 @@ import { CiLogout } from "react-icons/ci";
 import { IoIosClose } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
 import "../styles/sidenav.css";
+import { useRouter } from "next/navigation";
+import { AuthContext } from "@/context/AuthContext";
+import toast from "react-hot-toast";
 
 const Sidenav = ({ children }: PropsWithChildren) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const router = useRouter();
+  const { signOut } = useContext(AuthContext);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const handleLogout = () => {
+    try {
+      signOut();
+    } catch (error) {
+      toast.error("Erro ao sair!");
+      console.log("Erro ao deslogar usuário: ", error);
+    }
   };
 
   return (
@@ -67,10 +81,10 @@ const Sidenav = ({ children }: PropsWithChildren) => {
               </Link>
             </li>
             <li>
-              <Link href="/logout" prefetch={true}>
+              <span onClick={handleLogout} className="logout-btn">
                 <CiLogout size={30} />
                 <span>Sair</span>
-              </Link>
+              </span>
             </li>
           </ul>
         </div>

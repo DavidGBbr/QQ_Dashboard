@@ -4,7 +4,7 @@
   height: 10vh;
   display: none;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .menu-btn {
@@ -42,15 +42,18 @@
   margin: 1rem 0;
 }
 
-.sidebar ul li a {
+.sidebar ul li a,
+.sidebar ul li span {
   display: flex;
   align-items: center;
   gap: 0.7rem;
   transition: all 0.5s;
+  cursor: pointer;
 }
 
-.sidebar ul li a:hover {
-  transform: scale(0.9);
+.sidebar ul li a:hover,
+.sidebar ul li span:hover {
+  transform: scale(0.98);
 }
 
 .main-content {

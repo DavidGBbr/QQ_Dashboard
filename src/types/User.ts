@@ -6,4 +6,5 @@ export interface UserType {
   email: string;
   profile: ProfileType;
   profileId: number;
+  token?: string;
 }

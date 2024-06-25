@@ -1,11 +1,13 @@
 "use client";
 import { UserType } from "@/types/User";
+import { destroyCookie, setCookie } from "nookies";
 import { createContext, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 interface AuthContextData {
   user: UserType | undefined;
   signIn: (credentials: SignProps) => Promise<boolean>;
+  signOut: () => void;
 }
 
 interface SignProps {
@@ -36,10 +38,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           throw new Error(errorData.message || "Erro ao autenticar");
         }
 
-        const userData = await response.json();
+        const userData = (await response.json()) as UserType;
 
-        if (userData.name) {
+        if (userData.token) {
           setUser(userData);
+          setCookie(undefined, "@beaba.token", userData.token, {
+            maxAge: 60 * 60 * 24 * 30,
+            path: "/",
+          });
           toast.success("Usuário logado com sucesso!");
           resolve(true);
         } else {
@@ -52,8 +58,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     });
   };
 
+  const signOut = () => {
+    try {
+      destroyCookie(null, "@beaba.token", {
+        path: "/",
+      });
+      setUser(undefined);
+      toast.success("Usuário deslogado com sucesso!");
+    } catch (error) {
+      console.log("Erro ao sair");
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, signIn }}>
+    <AuthContext.Provider value={{ user, signIn, signOut }}>
       <Toaster position="bottom-right" reverseOrder={false} />
       {children}
     </AuthContext.Provider>

@@ -4,7 +4,6 @@ import ItemSearchBar from "@/components/ItemSearchBar";
 import ListItems from "@/components/ListItems";
 import { ItemType } from "@/types/Item";
 import { UserType } from "@/types/User";
-import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
 
@@ -24,8 +23,6 @@ const ListUsersForm = ({ data }: UserProps) => {
   const [filteredUsers, setFilteredUsers] = useState<ItemType[]>(users);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<ItemType | null>(null);
-
-  const router = useRouter();
 
   const handleDeleteClick = (user: ItemType) => {
     setSelectedUser(user);

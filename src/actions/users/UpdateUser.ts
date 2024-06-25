@@ -14,7 +14,6 @@ export async function updateUser(user: {
   });
 
   if (!response.ok) {
-    console.error("Failed to update the user");
     return { success: false };
   }
 

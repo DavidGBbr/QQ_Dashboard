@@ -24,7 +24,7 @@ const UpdateUserPage = ({ params }: PageParams) => {
     };
 
     getUser();
-  }, []);
+  }, [params.id]);
 
   return (
     <main className="container">

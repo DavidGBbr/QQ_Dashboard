@@ -1,14 +1,14 @@
 import { redirect } from "next/navigation";
 
 export async function createModule(formData: FormData) {
-  const module = {
+  const moduleData = {
     name: formData.get("nameModule") as string,
   };
 
   const response = await fetch("http://localhost:3333/module", {
     next: { revalidate: 0 },
     method: "POST",
-    body: JSON.stringify(module),
+    body: JSON.stringify(moduleData),
     headers: {
       "Content-Type": "application/json",
     },

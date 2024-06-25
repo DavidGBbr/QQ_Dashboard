@@ -26,7 +26,7 @@ const UpdateFunctionPage = ({ params }: PageParams) => {
     };
 
     getFunction();
-  }, []);
+  }, [params.id]);
 
   return (
     <main className="container">
