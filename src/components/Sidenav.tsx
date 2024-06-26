@@ -18,7 +18,6 @@ import toast from "react-hot-toast";
 
 const Sidenav = ({ children }: PropsWithChildren) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const router = useRouter();
   const { signOut } = useContext(AuthContext);
 
   const toggleMobileMenu = () => {

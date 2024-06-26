@@ -10,8 +10,8 @@ const Profiles = () => {
   useEffect(() => {
     const getData = async () => {
       const response = await fetch("http://localhost:3333/profile");
-      const users = (await response.json()) as ProfileType[];
-      setData(users);
+      const profiles = (await response.json()) as ProfileType[];
+      setData(profiles);
     };
 
     getData();

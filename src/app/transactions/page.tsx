@@ -1,15 +1,23 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import "@/styles/form.css";
 import ListTransactionsForm from "@/components/forms/transactions/ListTransactionsForm";
 import { TransactionType } from "@/types/Transaction";
 
-const Transactions = async () => {
-  const response = await fetch("http://localhost:3333/transaction", {
-    next: { revalidate: 0 },
-  });
-  const data = (await response.json()) as TransactionType[];
+const Transactions = () => {
+  const [data, setData] = useState<TransactionType[]>();
 
-  return <ListTransactionsForm data={data} />;
+  useEffect(() => {
+    const getData = async () => {
+      const response = await fetch("http://localhost:3333/transaction");
+      const transactions = (await response.json()) as TransactionType[];
+      setData(transactions);
+    };
+
+    getData();
+  }, []);
+
+  return <>{data && <ListTransactionsForm data={data} />}</>;
 };
 
 export default Transactions;
