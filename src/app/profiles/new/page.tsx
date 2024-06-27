@@ -7,7 +7,7 @@ const CreateProfilePage = () => {
   return (
     <main className="container">
       <div className="page-header">
-        <RedirectBtn path="profiles">{"< Voltar"}</RedirectBtn>
+        <RedirectBtn path="/profiles">{"< Voltar"}</RedirectBtn>
         <h2>Criar perfil</h2>
       </div>
 
