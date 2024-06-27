@@ -5,6 +5,7 @@ import ListItems from "@/components/ListItems";
 import { ItemType } from "@/types/Item";
 import { ProfileType } from "@/types/Profile";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { FaUserCog } from "react-icons/fa";
 
 type ProfileProps = {
@@ -33,8 +34,34 @@ const ListProfilesForm = ({ data }: ProfileProps) => {
     setSelectedProfile(null);
   };
 
-  const handleDeleteProfile = () => {
-    alert("Delete profile");
+  const handleDeleteProfile = async () => {
+    if (selectedProfile) {
+      try {
+        const response = await fetch(
+          `http://localhost:3333/profile/${selectedProfile.id}`,
+          {
+            method: "DELETE",
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to delete the profile");
+        }
+
+        handleCloseModal();
+        const updatedProfiles = profiles.filter(
+          (profile) => profile.id !== selectedProfile.id
+        );
+        setProfiles(updatedProfiles);
+        setFilteredProfiles(updatedProfiles);
+        toast.success("Perfil deletado com sucesso!");
+      } catch (error) {
+        toast.error("Falha ao deletar perfil");
+        console.error("Failed to delete the profile: ", error);
+      } finally {
+        handleCloseModal();
+      }
+    }
   };
 
   const handleSearch = (searchTerm: string) => {
@@ -67,8 +94,8 @@ const ListProfilesForm = ({ data }: ProfileProps) => {
         </div>
       </main>
       <DeleteModal
-        title="Deseja excluir a função?"
-        btnText="Excluir a função"
+        title="Deseja excluir o perfil?"
+        btnText="Excluir o perfil"
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         icon={FaUserCog}
