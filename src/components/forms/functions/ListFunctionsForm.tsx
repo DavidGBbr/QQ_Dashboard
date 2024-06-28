@@ -6,6 +6,7 @@ import RedirectBtn from "@/components/RedirectBtn";
 import { FunctionType } from "@/types/Function";
 import { ItemType } from "@/types/Item";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { MdReceiptLong } from "react-icons/md";
 
 type FunctionProps = {
@@ -39,20 +40,26 @@ const ListFunctionsForm = ({ data }: FunctionProps) => {
   const handleDeleteFunction = async () => {
     if (selectedFunction) {
       try {
-        await fetch(`http://localhost:3333/function/${selectedFunction.id}`, {
-          method: "DELETE",
-        });
-        handleCloseModal();
-        const response = await fetch("http://localhost:3333/function");
-        const data = (await response.json()) as FunctionType[];
-        const updatedFunctions = data.map((_function) => ({
-          id: _function.functionId,
-          name: `${_function.functionName} - ${_function.transactionName}`,
-        }));
+        const response = await fetch(
+          `http://localhost:3333/function/${selectedFunction.id}`,
+          {
+            method: "DELETE",
+          }
+        );
+
+        const updatedFunctions = functions.filter(
+          (_function) => _function.id !== selectedFunction.id
+        );
+
         setFunctions(updatedFunctions);
         setFilteredFunctions(updatedFunctions);
+
+        toast.success("Função deletada com sucesso!");
       } catch (error) {
+        toast.error("Falha ao deletar a função");
         console.error("Failed to delete the function:", error);
+      } finally {
+        handleCloseModal();
       }
     }
   };

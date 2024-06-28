@@ -5,6 +5,7 @@ import ListItems from "@/components/ListItems";
 import { ItemType } from "@/types/Item";
 import { TransactionType } from "@/types/Transaction";
 import { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 import { MdOutlineWindow } from "react-icons/md";
 
 type TransactionProps = {
@@ -37,23 +38,26 @@ const ListTransactionsForm = ({ data }: TransactionProps) => {
   const handleDeleteTransaction = async () => {
     if (selectedTransaction) {
       try {
-        await fetch(
+        const response = await fetch(
           `http://localhost:3333/transaction/${selectedTransaction.id}`,
           {
             method: "DELETE",
           }
         );
-        handleCloseModal();
-        const response = await fetch("http://localhost:3333/transaction");
-        const data = (await response.json()) as TransactionType[];
-        const updatedTransactions = data.map((transaction) => ({
-          id: transaction.transactionId,
-          name: `${transaction.transactionName} - ${transaction.moduleName}`,
-        }));
+
+        const updatedTransactions = transactions.filter(
+          (transaction) => transaction.id !== selectedTransaction.id
+        );
+
         setTransactions(updatedTransactions);
         setFilteredTransactions(updatedTransactions);
+
+        toast.success("Transação deletada com sucesso!");
       } catch (error) {
+        toast.error("Falha ao deletar a transação");
         console.error("Failed to delete the transaction:", error);
+      } finally {
+        handleCloseModal();
       }
     }
   };

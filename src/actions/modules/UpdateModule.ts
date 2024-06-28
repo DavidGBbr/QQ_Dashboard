@@ -1,5 +1,5 @@
 export async function updateModule(formData: FormData) {
-  const module = {
+  const moduleData = {
     moduleId: Number(formData.get("moduleId")),
     name: formData.get("name") as string,
   };
@@ -7,7 +7,7 @@ export async function updateModule(formData: FormData) {
   const response = await fetch("http://localhost:3333/module", {
     next: { revalidate: 0 },
     method: "PATCH",
-    body: JSON.stringify(module),
+    body: JSON.stringify(moduleData),
     headers: {
       "Content-Type": "application/json",
     },

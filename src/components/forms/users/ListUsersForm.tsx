@@ -5,6 +5,7 @@ import ListItems from "@/components/ListItems";
 import { ItemType } from "@/types/Item";
 import { UserType } from "@/types/User";
 import { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 import { FaUser } from "react-icons/fa";
 
 type UserProps = {
@@ -37,22 +38,29 @@ const ListUsersForm = ({ data }: UserProps) => {
   const handleDeleteUser = async () => {
     if (selectedUser) {
       try {
-        await fetch(`http://localhost:3333/user/${selectedUser.id}`, {
-          method: "DELETE",
-        });
-        handleCloseModal();
-        const response = await fetch("http://localhost:3333/user");
-        const data = (await response.json()) as UserType[];
-        const updatedUsers = data.map((user) => ({
-          id: user.userId,
-          name: user.name,
-          email: user.email,
-          profile: user.profile.name,
-        }));
+        const response = await fetch(
+          `http://localhost:3333/user/${selectedUser.id}`,
+          {
+            method: "DELETE",
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to delete the user");
+        }
+
+        const updatedUsers = users.filter(
+          (user) => user.id !== selectedUser.id
+        );
         setUsers(updatedUsers);
         setFilteredUsers(updatedUsers);
+
+        toast.success("Usuário deletado com sucesso!");
       } catch (error) {
+        toast.error("Falha ao deletar o usuário");
         console.error("Failed to delete the user:", error);
+      } finally {
+        handleCloseModal();
       }
     }
   };

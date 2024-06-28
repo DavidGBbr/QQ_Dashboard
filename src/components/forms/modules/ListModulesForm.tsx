@@ -5,6 +5,7 @@ import ListItems from "@/components/ListItems";
 import { ItemType } from "@/types/Item";
 import { ModuleType } from "@/types/Module";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { MdOutlineViewModule } from "react-icons/md";
 
 type ModuleProps = {
@@ -32,10 +33,36 @@ const ListModulesForm = ({ data }: ModuleProps) => {
     setSelectedModule(null);
   };
 
-  const handleDeleteModule = () => {
-    alert("Delete module");
-  };
+  const handleDeleteModule = async () => {
+    if (selectedModule) {
+      try {
+        const response = await fetch(
+          `http://localhost:3333/module/${selectedModule.id}`,
+          {
+            method: "DELETE",
+          }
+        );
 
+        if (!response.ok) {
+          throw new Error("Failed to delete the module");
+        }
+
+        const updatedModules = modules.filter(
+          (module) => module.id !== selectedModule.id
+        );
+
+        setModules(updatedModules);
+        setFilteredModules(updatedModules);
+
+        toast.success("Módulo deletado com sucesso!");
+      } catch (error) {
+        toast.error("Falha ao deletar o módulo");
+        console.error("Failed to delete the module: ", error);
+      } finally {
+        handleCloseModal();
+      }
+    }
+  };
   const handleSearch = (searchTerm: string) => {
     const filtered = modules.filter((module) =>
       module.name.toLowerCase().includes(searchTerm.toLowerCase())

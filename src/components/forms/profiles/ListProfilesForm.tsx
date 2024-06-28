@@ -48,15 +48,16 @@ const ListProfilesForm = ({ data }: ProfileProps) => {
           throw new Error("Failed to delete the profile");
         }
 
-        handleCloseModal();
         const updatedProfiles = profiles.filter(
           (profile) => profile.id !== selectedProfile.id
         );
+
         setProfiles(updatedProfiles);
         setFilteredProfiles(updatedProfiles);
+
         toast.success("Perfil deletado com sucesso!");
       } catch (error) {
-        toast.error("Falha ao deletar perfil");
+        toast.error("Falha ao deletar o perfil");
         console.error("Failed to delete the profile: ", error);
       } finally {
         handleCloseModal();
