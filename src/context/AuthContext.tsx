@@ -1,13 +1,22 @@
 "use client";
+import {
+  createContext,
+  useState,
+  ReactNode,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { UserType } from "@/types/User";
-import { destroyCookie, setCookie } from "nookies";
-import { createContext, useState } from "react";
+import { destroyCookie, setCookie, parseCookies } from "nookies";
 import toast, { Toaster } from "react-hot-toast";
 
 interface AuthContextData {
   user: UserType | undefined;
   signIn: (credentials: SignProps) => Promise<boolean>;
   signOut: () => void;
+  email: string | undefined;
+  setEmail: Dispatch<SetStateAction<string>>;
 }
 
 interface SignProps {
@@ -17,8 +26,17 @@ interface SignProps {
 
 export const AuthContext = createContext({} as AuthContextData);
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<UserType>();
+  const [email, setEmail] = useState<string>("");
+
+  useEffect(() => {
+    const cookies = parseCookies();
+    const email = cookies.email;
+    if (email) {
+      setEmail(email);
+    }
+  }, []);
 
   const signIn = async ({ email, password }: SignProps) => {
     return new Promise<boolean>(async (resolve, reject) => {
@@ -42,7 +60,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
         if (userData.token) {
           setUser(userData);
-          setCookie(undefined, "@beaba.token", userData.token, {
+          setCookie(null, "@beaba.token", userData.token, {
+            maxAge: 60 * 60 * 24 * 30,
+            path: "/",
+          });
+          setEmail(email);
+          setCookie(null, "email", email, {
             maxAge: 60 * 60 * 24 * 30,
             path: "/",
           });
@@ -63,7 +86,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       destroyCookie(null, "@beaba.token", {
         path: "/",
       });
+      destroyCookie(null, "email", {
+        path: "/",
+      });
       setUser(undefined);
+      setEmail("");
       toast.success("Usuário deslogado com sucesso!");
     } catch (error) {
       console.log("Erro ao sair");
@@ -71,7 +98,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, signIn, signOut, email, setEmail }}>
       <Toaster position="bottom-right" reverseOrder={false} />
       {children}
     </AuthContext.Provider>

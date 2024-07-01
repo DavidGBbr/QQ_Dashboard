@@ -2,27 +2,24 @@ import React from "react";
 import "@/styles/form.css";
 import "@/styles/forget.css";
 import { Metadata } from "next";
+import ResetPasswordForm from "@/components/forms/reset_password/ResetPasswordForm";
 
 export const metadata: Metadata = {
   title: "Redefinir senha",
 };
 
-const ResetPage = () => {
+type PageParams = {
+  params: {
+    token: string;
+  };
+};
+
+const ResetPage = ({ params }: PageParams) => {
   return (
     <main className="container">
       <h1>Redefina a senha da sua conta</h1>
       <p>Digite sua nova senha:</p>
-      <form action="" className="form-container">
-        <input
-          type="password"
-          id="password"
-          placeholder="Digite sua senha..."
-        />
-
-        <button type="submit" className="button-green">
-          Redefinir senha
-        </button>
-      </form>
+      <ResetPasswordForm token={params.token} />
     </main>
   );
 };
