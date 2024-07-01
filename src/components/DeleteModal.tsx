@@ -1,7 +1,6 @@
 import React from "react";
 import { IoClose } from "react-icons/io5";
 import "../styles/modal.css";
-import { FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
 interface DeleteModalProps {

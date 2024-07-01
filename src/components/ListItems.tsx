@@ -1,4 +1,6 @@
+"use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { IconType } from "react-icons";
 import UpdateBtn from "./UpdateBtn";
 import DeleteBtn from "./DeleteBtn";
@@ -9,6 +11,7 @@ interface ListItemsProps {
   ItemIcon: IconType;
   onDelete: (item: ItemType) => void;
   updatePath: string;
+  detailPath: string;
 }
 
 const ListItems: React.FC<ListItemsProps> = ({
@@ -16,13 +19,19 @@ const ListItems: React.FC<ListItemsProps> = ({
   ItemIcon,
   onDelete,
   updatePath,
+  detailPath,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const totalPages = Math.ceil(items.length / itemsPerPage);
+  const router = useRouter();
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+  };
+
+  const handleItemClick = (itemId: number) => {
+    router.push(`/${detailPath}/${itemId}`);
   };
 
   const paginatedItems = items.slice(
@@ -34,7 +43,7 @@ const ListItems: React.FC<ListItemsProps> = ({
     <div className="list-container">
       <ul className="list-items">
         {paginatedItems.map((item) => (
-          <li key={item.id}>
+          <li key={item.id} onClick={() => handleItemClick(item.id)}>
             <div className="icon-name-container">
               <ItemIcon size={30} />
               <div className="name-email-container">

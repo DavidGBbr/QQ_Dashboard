@@ -11,8 +11,8 @@ import {
 import { CiLogout } from "react-icons/ci";
 import { IoIosClose } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
+import { TbReportSearch } from "react-icons/tb";
 import "../styles/sidenav.css";
-import { useRouter } from "next/navigation";
 import { AuthContext } from "@/context/AuthContext";
 import toast from "react-hot-toast";
 
@@ -77,6 +77,12 @@ const Sidenav = ({ children }: PropsWithChildren) => {
               <Link href="/functions" prefetch={true}>
                 <MdReceiptLong size={30} />
                 <span>Funções</span>
+              </Link>
+            </li>
+            <li>
+              <Link href="/reports" prefetch={true}>
+                <TbReportSearch size={30} />
+                <span>Relatórios</span>
               </Link>
             </li>
             <li>

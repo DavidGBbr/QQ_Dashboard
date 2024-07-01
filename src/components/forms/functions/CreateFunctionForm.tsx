@@ -62,7 +62,7 @@ const CreateFunctionForm = () => {
             onChange={(e) => setFunctionName(e.target.value)}
           />
         </label>
-        <SubmitBtn>Criar transação</SubmitBtn>
+        <SubmitBtn>Criar função</SubmitBtn>
       </form>
     </div>
   );
