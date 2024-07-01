@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import "@/styles/form.css";
 import RedirectBtn from "@/components/RedirectBtn";
-import UpdateUserForm from "@/components/forms/users/UpdateUserForm";
 import { UserType } from "@/types/User";
 import DetailUserForm from "@/components/forms/users/DetailUserForm";
 

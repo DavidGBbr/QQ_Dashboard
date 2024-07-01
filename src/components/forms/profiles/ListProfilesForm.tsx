@@ -90,7 +90,8 @@ const ListProfilesForm = ({ data }: ProfileProps) => {
             items={filteredProfiles}
             ItemIcon={FaUserCog}
             onDelete={handleDeleteClick}
-            updatePath={"profiles/update"}
+            updatePath="profiles/update"
+            detailPath="profiles/detail"
           />
         </div>
       </main>

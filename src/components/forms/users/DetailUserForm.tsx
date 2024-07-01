@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-type UpdateUserProps = {
+type DetailUserProps = {
   data:
     | {
         userId: number;
@@ -15,7 +15,7 @@ type UpdateUserProps = {
     | undefined;
 };
 
-const DetailUserForm = ({ data }: UpdateUserProps) => {
+const DetailUserForm = ({ data }: DetailUserProps) => {
   return (
     <div className="form-wrapper">
       {data ? (
