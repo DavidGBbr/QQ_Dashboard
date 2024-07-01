@@ -2,8 +2,6 @@
 import React, { useEffect, useState } from "react";
 import "@/styles/form.css";
 import RedirectBtn from "@/components/RedirectBtn";
-import { UserType } from "@/types/User";
-import DetailUserForm from "@/components/forms/users/DetailUserForm";
 import { ModuleType } from "@/types/Module";
 import DetailModuleForm from "@/components/forms/modules/DetailModuleForm";
 

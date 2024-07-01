@@ -34,14 +34,14 @@ const DetailProfileForm = ({ data }: DetailProfileProps) => {
                       ))}
                   </ul>
                 ) : (
-                  <p>Sem módulos relacionados</p>
+                  <p>Nenhum módulo relacionado encontrado.</p>
                 )}
               </td>
             </tr>
           </tbody>
         </table>
       ) : (
-        <p>No profile data available</p>
+        <p>Dados do perfil não disponíveis</p>
       )}
     </div>
   );

@@ -40,7 +40,7 @@ const DetailUserForm = ({ data }: DetailUserProps) => {
           </tbody>
         </table>
       ) : (
-        <p>No user data available</p>
+        <p>Dados do usuário não disponíveis</p>
       )}
     </div>
   );

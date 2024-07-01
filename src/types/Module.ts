@@ -1,6 +1,6 @@
 import { TransactionType } from "./Transaction";
 
-interface ModuleTransactionType {
+export interface ModuleTransactionType {
   moduleId: number;
   transactionId: number;
   transaction: {

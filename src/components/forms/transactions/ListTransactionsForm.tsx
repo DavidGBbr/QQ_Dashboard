@@ -88,7 +88,8 @@ const ListTransactionsForm = ({ data }: TransactionProps) => {
             items={filteredTransactions}
             ItemIcon={MdOutlineWindow}
             onDelete={handleDeleteClick}
-            updatePath={"transactions/update"}
+            updatePath="transactions/update"
+            detailPath="transactions/detail"
           />
         </div>
       </main>
