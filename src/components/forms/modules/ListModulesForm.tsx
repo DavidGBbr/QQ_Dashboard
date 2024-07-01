@@ -88,7 +88,8 @@ const ListModulesForm = ({ data }: ModuleProps) => {
             items={filteredModules}
             ItemIcon={MdOutlineViewModule}
             onDelete={handleDeleteClick}
-            updatePath={"modules/update"}
+            updatePath="modules/update"
+            detailPath="modules/detail"
           />
         </div>
       </main>

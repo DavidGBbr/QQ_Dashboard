@@ -43,8 +43,11 @@ const ListItems: React.FC<ListItemsProps> = ({
     <div className="list-container">
       <ul className="list-items">
         {paginatedItems.map((item) => (
-          <li key={item.id} onClick={() => handleItemClick(item.id)}>
-            <div className="icon-name-container">
+          <li key={item.id}>
+            <div
+              className="icon-name-container"
+              onClick={() => handleItemClick(item.id)}
+            >
               <ItemIcon size={30} />
               <div className="name-email-container">
                 <strong>{item.name}</strong>
