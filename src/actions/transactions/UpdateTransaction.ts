@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 export async function updateTransaction(formData: FormData) {
   const transaction = {
     transactionId: Number(formData.get("transactionId")),
@@ -15,9 +17,11 @@ export async function updateTransaction(formData: FormData) {
   });
 
   if (!response.ok) {
+    toast.error("Falha ao atualizar a transação");
     console.error("Failed to update a transaction");
     return;
   }
 
   await response.json();
+  toast.success("Transação atualizada com sucesso!");
 }

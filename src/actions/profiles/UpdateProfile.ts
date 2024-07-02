@@ -22,6 +22,7 @@ export async function updateProfile(formData: FormData) {
   });
 
   if (!response.ok) {
+    toast.error("Falha ao atualizar o perfil");
     console.error("Failed to update the profile");
     return;
   }

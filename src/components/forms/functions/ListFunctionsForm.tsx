@@ -89,7 +89,8 @@ const ListFunctionsForm = ({ data }: FunctionProps) => {
             items={filteredFunctions}
             ItemIcon={MdReceiptLong}
             onDelete={handleDeleteClick}
-            updatePath={"functions/update"}
+            updatePath="functions/update"
+            detailPath="functions/detail"
           />
         </div>
       </main>

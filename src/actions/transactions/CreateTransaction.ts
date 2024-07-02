@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 export async function createTransaction(formData: FormData) {
   const transaction = {
     moduleId: Number(formData.get("module")),
@@ -14,9 +16,11 @@ export async function createTransaction(formData: FormData) {
   });
 
   if (!response.ok) {
+    toast.error("Falha ao criar a transação");
     console.error("Failed to create a transaction");
     return;
   }
 
   await response.json();
+  toast.success("Transação criada com sucesso!");
 }

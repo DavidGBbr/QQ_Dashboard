@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 export async function updateUser(user: {
   userId: number;
   name: string;
@@ -14,8 +16,10 @@ export async function updateUser(user: {
   });
 
   if (!response.ok) {
+    toast.error("Falha ao atualizar o usuário");
     return { success: false };
   }
 
+  toast.success("Usuário atualizado com sucesso!");
   return { success: true };
 }

@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 export async function createProfile(formData: FormData) {
   const profile = {
     moduleId: Number(formData.get("module")),
@@ -14,9 +16,11 @@ export async function createProfile(formData: FormData) {
   });
 
   if (!response.ok) {
+    toast.error("Falha ao criar o perfil");
     console.error("Failed to create a profile");
     return;
   }
 
+  toast.success("Perfil criado com sucesso!");
   await response.json();
 }

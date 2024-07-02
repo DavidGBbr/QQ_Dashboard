@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 export async function updateModule(formData: FormData) {
   const moduleData = {
     moduleId: Number(formData.get("moduleId")),
@@ -14,9 +16,11 @@ export async function updateModule(formData: FormData) {
   });
 
   if (!response.ok) {
+    toast.error("Falha ao atualizar o módulo");
     console.error("Failed to update the module");
     return;
   }
 
   await response.json();
+  toast.success("Módulo atualizado com sucesso!");
 }

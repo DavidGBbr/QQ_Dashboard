@@ -33,7 +33,7 @@ const DetailModuleForm = ({ data }: DetailModuleProps) => {
                       )
                       .map((pm) => (
                         <li key={pm.transaction.transactionId}>
-                          {pm.transaction.name} (ID:{" "}
+                          {pm.transaction.name} (ID da transação:{" "}
                           {pm.transaction.transactionId})
                         </li>
                       ))}

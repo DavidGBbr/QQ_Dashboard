@@ -29,7 +29,7 @@ const DetailProfileForm = ({ data }: DetailProfileProps) => {
                       .sort((a, b) => a.module.moduleId - b.module.moduleId)
                       .map((pm) => (
                         <li key={pm.moduleId}>
-                          {pm.module.name} (ID: {pm.module.moduleId})
+                          {pm.module.name} (ID do módulo: {pm.module.moduleId})
                         </li>
                       ))}
                   </ul>

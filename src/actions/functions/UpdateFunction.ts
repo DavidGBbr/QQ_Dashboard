@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 export async function updateFunction(formData: FormData) {
   const _function = {
     functionId: Number(formData.get("functionId")),
@@ -15,9 +17,11 @@ export async function updateFunction(formData: FormData) {
   });
 
   if (!response.ok) {
+    toast.error("Falha ao atualizar a função");
     console.error("Failed to update a function");
     return;
   }
 
   await response.json();
+  toast.success("Função atualizada com sucesso!");
 }
