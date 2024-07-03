@@ -12,6 +12,7 @@ interface ListItemsProps {
   onDelete: (item: ItemType) => void;
   updatePath: string;
   detailPath: string;
+  emptyDataText: string;
 }
 
 const ListItems: React.FC<ListItemsProps> = ({
@@ -20,6 +21,7 @@ const ListItems: React.FC<ListItemsProps> = ({
   onDelete,
   updatePath,
   detailPath,
+  emptyDataText,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
@@ -41,38 +43,46 @@ const ListItems: React.FC<ListItemsProps> = ({
 
   return (
     <div className="list-container">
-      <ul className="list-items">
-        {paginatedItems.map((item) => (
-          <li key={item.id}>
-            <div
-              className="icon-name-container"
-              onClick={() => handleItemClick(item.id)}
-            >
-              <ItemIcon size={30} />
-              <div className="name-email-container">
-                <strong>{item.name}</strong>
-                <p>{item.email}</p>
-              </div>
-            </div>
-            <p>{item.profile}</p>
-            <div className="action-btn-container">
-              <UpdateBtn path={`/${updatePath}/${item.id}`} />
-              <DeleteBtn onDelete={() => onDelete(item)} />
-            </div>
-          </li>
-        ))}
-      </ul>
-      <div className="pagination">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index}
-            className={`page-btn ${currentPage === index + 1 ? "active" : ""}`}
-            onClick={() => handlePageChange(index + 1)}
-          >
-            {index + 1}
-          </button>
-        ))}
-      </div>
+      {items.length ? (
+        <>
+          <ul className="list-items">
+            {paginatedItems.map((item) => (
+              <li key={item.id}>
+                <div
+                  className="icon-name-container"
+                  onClick={() => handleItemClick(item.id)}
+                >
+                  <ItemIcon size={30} />
+                  <div className="name-email-container">
+                    <strong>{item.name}</strong>
+                    <p>{item.email}</p>
+                  </div>
+                </div>
+                <p>{item.profile}</p>
+                <div className="action-btn-container">
+                  <UpdateBtn path={`/${updatePath}/${item.id}`} />
+                  <DeleteBtn onDelete={() => onDelete(item)} />
+                </div>
+              </li>
+            ))}
+          </ul>
+          <div className="pagination">
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index}
+                className={`page-btn ${
+                  currentPage === index + 1 ? "active" : ""
+                }`}
+                onClick={() => handlePageChange(index + 1)}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
+        </>
+      ) : (
+        <p className="empty-text">{emptyDataText}</p>
+      )}
     </div>
   );
 };

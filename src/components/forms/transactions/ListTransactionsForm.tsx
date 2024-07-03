@@ -90,6 +90,7 @@ const ListTransactionsForm = ({ data }: TransactionProps) => {
             onDelete={handleDeleteClick}
             updatePath="transactions/update"
             detailPath="transactions/detail"
+            emptyDataText="Nenhuma transação encontrada..."
           />
         </div>
       </main>

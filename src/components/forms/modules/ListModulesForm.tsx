@@ -90,6 +90,7 @@ const ListModulesForm = ({ data }: ModuleProps) => {
             onDelete={handleDeleteClick}
             updatePath="modules/update"
             detailPath="modules/detail"
+            emptyDataText="Nenhum módulo encontrado..."
           />
         </div>
       </main>

@@ -1,0 +1,34 @@
+.reports-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: center;
+  flex-direction: column;
+}
+
+.details-table {
+  width: 100%;
+}
+
+.chart-wrapper {
+  width: 100%;
+  height: 200px;
+}
+
+.reports-btn {
+  padding: 0.5rem;
+  outline: none;
+  border: none;
+  font-weight: bold;
+  background-color: #fba931;
+  color: #12131b;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.reports-btn:hover {
+  background-color: #c78627;
+  color: #12131b;
+  transform: scale(0.98);
+}

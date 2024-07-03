@@ -91,6 +91,7 @@ const ListFunctionsForm = ({ data }: FunctionProps) => {
             onDelete={handleDeleteClick}
             updatePath="functions/update"
             detailPath="functions/detail"
+            emptyDataText="Nenhuma função encontrada..."
           />
         </div>
       </main>

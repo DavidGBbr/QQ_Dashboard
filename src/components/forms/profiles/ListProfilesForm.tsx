@@ -92,6 +92,7 @@ const ListProfilesForm = ({ data }: ProfileProps) => {
             onDelete={handleDeleteClick}
             updatePath="profiles/update"
             detailPath="profiles/detail"
+            emptyDataText="Nenhum perfil encontrado..."
           />
         </div>
       </main>

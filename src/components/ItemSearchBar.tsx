@@ -19,7 +19,7 @@ const ItemSearchBar = ({
   };
 
   return (
-    <>
+    <nav className="navbar">
       <div className="page-header">
         <h2>{title}</h2>
         <RedirectBtn path={redirectPath}>Registrar</RedirectBtn>
@@ -32,7 +32,7 @@ const ItemSearchBar = ({
         />
         <button className="button-green">Filtrar</button>
       </div>
-    </>
+    </nav>
   );
 };
 

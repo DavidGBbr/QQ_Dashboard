@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import "@/styles/form.css";
 import { SubmitBtn } from "@/components/SubmitBtn";
 import { AuthContext } from "@/context/AuthContext";
+import "@/styles/login.css";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
@@ -25,7 +26,7 @@ const Login = () => {
   };
 
   return (
-    <main className="container">
+    <main className="login-content">
       <Image src="/images/logo.svg" alt="Logo" width={100} height={100} />
 
       <form onSubmit={handleSubmit} className="form-container">
@@ -37,6 +38,7 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)}
           value={email}
           disabled={loading}
+          required
         />
         <input
           type="password"
@@ -46,6 +48,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           value={password}
           disabled={loading}
+          required
         />
         <SubmitBtn disabled={loading}>
           {loading ? "Carregando..." : "Acessar"}

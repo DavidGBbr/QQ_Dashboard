@@ -23,6 +23,10 @@
   .form-container {
     max-width: 80vh;
   }
+
+  .form-wrapper {
+    max-width: 100%;
+  }
 }
 
 .form-container form {

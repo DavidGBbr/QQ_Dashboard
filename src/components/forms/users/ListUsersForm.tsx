@@ -92,6 +92,7 @@ const ListUsersForm = ({ data }: UserProps) => {
             onDelete={handleDeleteClick}
             updatePath="users/update"
             detailPath="users/detail"
+            emptyDataText="Nenhum usuário encontrado..."
           />
         </div>
       </main>

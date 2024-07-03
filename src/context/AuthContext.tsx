@@ -14,7 +14,7 @@ import toast, { Toaster } from "react-hot-toast";
 interface AuthContextData {
   user: UserType | undefined;
   signIn: (credentials: SignProps) => Promise<boolean>;
-  signOut: () => void;
+  signOut: () => Promise<boolean>;
   email: string | undefined;
   setEmail: Dispatch<SetStateAction<string>>;
 }
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const signIn = async ({ email, password }: SignProps) => {
-    return new Promise<boolean>(async (resolve, reject) => {
+    return new Promise<boolean>(async (resolve) => {
       const session = { email, password };
 
       try {
@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
         if (!response.ok) {
           const errorData = await response.json();
-          throw new Error(errorData.message || "Erro ao autenticar");
+          throw new Error(errorData.message || "Usuário ou senha incorretos");
         }
 
         const userData = (await response.json()) as UserType;
@@ -82,19 +82,24 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const signOut = () => {
-    try {
-      destroyCookie(null, "@beaba.token", {
-        path: "/",
-      });
-      destroyCookie(null, "email", {
-        path: "/",
-      });
-      setUser(undefined);
-      setEmail("");
-      toast.success("Usuário deslogado com sucesso!");
-    } catch (error) {
-      console.log("Erro ao sair");
-    }
+    return new Promise<boolean>((resolve) => {
+      try {
+        destroyCookie(null, "@beaba.token", {
+          path: "/",
+        });
+        destroyCookie(null, "email", {
+          path: "/",
+        });
+        setUser(undefined);
+        setEmail("");
+        toast.success("Usuário deslogado com sucesso!");
+        resolve(true);
+      } catch (error) {
+        console.log("Erro ao sair:", error);
+        toast.error("Erro ao deslogar usuário");
+        resolve(false);
+      }
+    });
   };
 
   return (

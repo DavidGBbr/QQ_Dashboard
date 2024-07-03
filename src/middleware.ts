@@ -13,11 +13,7 @@ export async function middleware(req: NextRequest) {
     functionsURL: new URL("/functions", req.url),
   };
 
-  if (token) {
-    if (req.nextUrl.pathname.endsWith("/")) {
-      return NextResponse.redirect(routes.usersURL);
-    }
-  } else {
+  if (!token) {
     if (
       req.nextUrl.pathname.startsWith("/users") ||
       req.nextUrl.pathname.startsWith("/profiles") ||

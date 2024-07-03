@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 const ForgetPage = () => {
   return (
-    <main className="container">
+    <main className="forget-content">
       <h1>Esqueceu sua senha?</h1>
       <p>Insira seu e-mail e enviaremos um link para recuperação de senha.</p>
       <ForgetPasswordForm />

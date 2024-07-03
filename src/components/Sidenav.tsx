@@ -15,18 +15,21 @@ import { TbReportSearch } from "react-icons/tb";
 import "../styles/sidenav.css";
 import { AuthContext } from "@/context/AuthContext";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const Sidenav = ({ children }: PropsWithChildren) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { signOut } = useContext(AuthContext);
+  const router = useRouter();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     try {
-      signOut();
+      const success = await signOut();
+      if (success) router.push("/");
     } catch (error) {
       toast.error("Erro ao sair!");
       console.log("Erro ao deslogar usuário: ", error);
