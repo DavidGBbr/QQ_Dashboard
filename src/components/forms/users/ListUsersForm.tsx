@@ -37,7 +37,7 @@ const ListUsersForm = ({ data }: UserProps) => {
   };
 
   const handleDeleteUser = async () => {
-    if (selectedUser?.id !== user?.userId) {
+    if (selectedUser?.id === user?.userId) {
       alert("Usuário não pode se deletar!");
       handleCloseModal();
       return;
