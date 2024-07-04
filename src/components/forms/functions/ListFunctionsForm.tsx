@@ -6,7 +6,6 @@ import RedirectBtn from "@/components/RedirectBtn";
 import { FunctionType } from "@/types/Function";
 import { ItemType } from "@/types/Item";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import { MdReceiptLong } from "react-icons/md";
 
 type FunctionProps = {
@@ -54,9 +53,9 @@ const ListFunctionsForm = ({ data }: FunctionProps) => {
         setFunctions(updatedFunctions);
         setFilteredFunctions(updatedFunctions);
 
-        toast.success("Função deletada com sucesso!");
+        alert("Função deletada com sucesso!");
       } catch (error) {
-        toast.error("Falha ao deletar a função");
+        alert("Falha ao deletar a função");
         console.error("Failed to delete the function:", error);
       } finally {
         handleCloseModal();

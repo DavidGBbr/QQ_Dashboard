@@ -1,5 +1,3 @@
-import toast from "react-hot-toast";
-
 type ResponseType = {
   message: string;
   associated: boolean;
@@ -22,14 +20,14 @@ export async function updateProfile(formData: FormData) {
   });
 
   if (!response.ok) {
-    toast.error("Falha ao atualizar o perfil");
+    alert("Falha ao atualizar o perfil");
     console.error("Failed to update the profile");
     return;
   }
 
   const associated = (await response.json()) as ResponseType;
 
-  toast.success(
+  alert(
     associated.associated
       ? "Perfil atualizado: módulo vinculado!"
       : "Perfil atualizado: módulo desvinculado!"

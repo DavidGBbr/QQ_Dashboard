@@ -9,7 +9,6 @@ import {
 } from "react";
 import { UserType } from "@/types/User";
 import { destroyCookie, setCookie, parseCookies } from "nookies";
-import toast, { Toaster } from "react-hot-toast";
 
 interface AuthContextData {
   user: UserType | undefined;
@@ -69,13 +68,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             maxAge: 60 * 60 * 24 * 30,
             path: "/",
           });
-          toast.success("Usuário logado com sucesso!");
+          alert("Usuário logado com sucesso!");
           resolve(true);
         } else {
+          alert("Dados do usuário inválidos");
           throw new Error("Dados do usuário inválidos");
         }
       } catch (error: any) {
-        toast.error(`Erro: ${error.message}`);
+        alert(error.message);
         resolve(false);
       }
     });
@@ -92,11 +92,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         });
         setUser(undefined);
         setEmail("");
-        toast.success("Usuário deslogado com sucesso!");
+        alert("Usuário deslogado com sucesso!");
         resolve(true);
       } catch (error) {
         console.log("Erro ao sair:", error);
-        toast.error("Erro ao deslogar usuário");
+        alert("Erro ao deslogar usuário");
         resolve(false);
       }
     });
@@ -104,7 +104,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider value={{ user, signIn, signOut, email, setEmail }}>
-      <Toaster position="bottom-right" reverseOrder={false} />
       {children}
     </AuthContext.Provider>
   );

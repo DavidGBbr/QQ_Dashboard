@@ -14,7 +14,6 @@ import { IoMenu } from "react-icons/io5";
 import { TbReportSearch } from "react-icons/tb";
 import "../styles/sidenav.css";
 import { AuthContext } from "@/context/AuthContext";
-import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 const Sidenav = ({ children }: PropsWithChildren) => {
@@ -31,7 +30,7 @@ const Sidenav = ({ children }: PropsWithChildren) => {
       const success = await signOut();
       if (success) router.push("/");
     } catch (error) {
-      toast.error("Erro ao sair!");
+      alert("Erro ao sair!");
       console.log("Erro ao deslogar usuário: ", error);
     }
   };

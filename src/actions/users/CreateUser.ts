@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation";
-import toast from "react-hot-toast";
 
 export async function createUser(formData: FormData) {
   const user = {
@@ -19,12 +18,12 @@ export async function createUser(formData: FormData) {
   });
 
   if (!response.ok) {
-    toast.error("Falha ao criar o usuário");
+    alert("Falha ao criar o usuário");
     console.error("Failed to create a user");
     return;
   }
 
   await response.json();
-  toast.success("Usuário criado com sucesso!");
+  alert("Usuário criado com sucesso!");
   redirect("/users");
 }

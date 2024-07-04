@@ -4,7 +4,6 @@ import { SubmitBtn } from "@/components/SubmitBtn";
 import { AuthContext } from "@/context/AuthContext";
 import { setCookie } from "nookies";
 import { useContext, useState } from "react";
-import toast from "react-hot-toast";
 
 const ForgetPasswordForm = () => {
   const { setEmail } = useContext(AuthContext);
@@ -19,9 +18,9 @@ const ForgetPasswordForm = () => {
         maxAge: 60 * 60 * 24 * 30,
         path: "/",
       });
-      toast.success("Link de recuperação enviado com sucesso!");
+      alert("Link de recuperação enviado com sucesso!");
     } catch (error) {
-      toast.error("Erro ao enviar link de recuperação");
+      alert("Erro ao enviar link de recuperação");
     }
   };
 

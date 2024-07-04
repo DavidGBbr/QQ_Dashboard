@@ -5,7 +5,6 @@ import ListItems from "@/components/ListItems";
 import { ItemType } from "@/types/Item";
 import { ProfileType } from "@/types/Profile";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import { FaUserCog } from "react-icons/fa";
 
 type ProfileProps = {
@@ -55,9 +54,9 @@ const ListProfilesForm = ({ data }: ProfileProps) => {
         setProfiles(updatedProfiles);
         setFilteredProfiles(updatedProfiles);
 
-        toast.success("Perfil deletado com sucesso!");
+        alert("Perfil deletado com sucesso!");
       } catch (error) {
-        toast.error("Falha ao deletar o perfil");
+        alert("Falha ao deletar o perfil");
         console.error("Failed to delete the profile: ", error);
       } finally {
         handleCloseModal();

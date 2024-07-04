@@ -1,5 +1,3 @@
-import toast from "react-hot-toast";
-
 export async function createFunction(formData: FormData) {
   const _function = {
     transactionId: Number(formData.get("transaction")),
@@ -16,11 +14,11 @@ export async function createFunction(formData: FormData) {
   });
 
   if (!response.ok) {
-    toast.error("Falha ao criar a função");
+    alert("Falha ao criar a função");
     console.error("Failed to create a function");
     return;
   }
 
   await response.json();
-  toast.success("Função criada com sucesso!");
+  alert("Função criada com sucesso!");
 }

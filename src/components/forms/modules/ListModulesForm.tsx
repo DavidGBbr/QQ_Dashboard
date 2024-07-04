@@ -5,7 +5,6 @@ import ListItems from "@/components/ListItems";
 import { ItemType } from "@/types/Item";
 import { ModuleType } from "@/types/Module";
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import { MdOutlineViewModule } from "react-icons/md";
 
 type ModuleProps = {
@@ -54,9 +53,9 @@ const ListModulesForm = ({ data }: ModuleProps) => {
         setModules(updatedModules);
         setFilteredModules(updatedModules);
 
-        toast.success("Módulo deletado com sucesso!");
+        alert("Módulo deletado com sucesso!");
       } catch (error) {
-        toast.error("Falha ao deletar o módulo");
+        alert("Falha ao deletar o módulo");
         console.error("Failed to delete the module: ", error);
       } finally {
         handleCloseModal();

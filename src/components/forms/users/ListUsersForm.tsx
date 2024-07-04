@@ -5,7 +5,6 @@ import ListItems from "@/components/ListItems";
 import { ItemType } from "@/types/Item";
 import { UserType } from "@/types/User";
 import { useState, useEffect } from "react";
-import toast from "react-hot-toast";
 import { FaUser } from "react-icons/fa";
 
 type UserProps = {
@@ -55,9 +54,9 @@ const ListUsersForm = ({ data }: UserProps) => {
         setUsers(updatedUsers);
         setFilteredUsers(updatedUsers);
 
-        toast.success("Usuário deletado com sucesso!");
+        alert("Usuário deletado com sucesso!");
       } catch (error) {
-        toast.error("Falha ao deletar o usuário");
+        alert("Falha ao deletar o usuário");
         console.error("Failed to delete the user:", error);
       } finally {
         handleCloseModal();

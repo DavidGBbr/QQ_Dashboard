@@ -4,7 +4,6 @@ import { SubmitBtn } from "@/components/SubmitBtn";
 import { AuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { FormEvent, useContext, useState } from "react";
-import toast from "react-hot-toast";
 
 const ResetPasswordForm = ({ token }: { token: string }) => {
   const { email } = useContext(AuthContext);
@@ -15,7 +14,7 @@ const ResetPasswordForm = ({ token }: { token: string }) => {
     e.preventDefault();
 
     if (!email) {
-      toast.error("Email não encontrado");
+      alert("Email não encontrado");
       return;
     }
 
@@ -26,11 +25,11 @@ const ResetPasswordForm = ({ token }: { token: string }) => {
         token,
       });
       if (success) {
-        toast.success("Senha redefinida com sucesso!");
+        alert("Senha redefinida com sucesso!");
         router.push("/");
       }
     } catch (error) {
-      toast.error("Falha ao redefinir a senha. Tente novamente.");
+      alert("Falha ao redefinir a senha. Tente novamente.");
       console.error("Error resetting password:", error);
     }
   };

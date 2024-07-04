@@ -5,7 +5,6 @@ import ListItems from "@/components/ListItems";
 import { ItemType } from "@/types/Item";
 import { TransactionType } from "@/types/Transaction";
 import { useState, useEffect } from "react";
-import toast from "react-hot-toast";
 import { MdOutlineWindow } from "react-icons/md";
 
 type TransactionProps = {
@@ -52,9 +51,9 @@ const ListTransactionsForm = ({ data }: TransactionProps) => {
         setTransactions(updatedTransactions);
         setFilteredTransactions(updatedTransactions);
 
-        toast.success("Transação deletada com sucesso!");
+        alert("Transação deletada com sucesso!");
       } catch (error) {
-        toast.error("Falha ao deletar a transação");
+        alert("Falha ao deletar a transação");
         console.error("Failed to delete the transaction:", error);
       } finally {
         handleCloseModal();

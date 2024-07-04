@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation";
-import toast from "react-hot-toast";
 
 export async function createModule(formData: FormData) {
   const moduleData = {
@@ -16,12 +15,12 @@ export async function createModule(formData: FormData) {
   });
 
   if (!response.ok) {
-    toast.error("Falha ao criar o módulo");
+    alert("Falha ao criar o módulo");
     console.error("Failed to create a module");
     return;
   }
 
   await response.json();
-  toast.success("Módulo criado com sucesso!");
+  alert("Módulo criado com sucesso!");
   redirect("/modules");
 }
