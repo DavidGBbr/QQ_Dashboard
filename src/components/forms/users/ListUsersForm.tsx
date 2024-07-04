@@ -2,9 +2,10 @@
 import DeleteModal from "@/components/DeleteModal";
 import ItemSearchBar from "@/components/ItemSearchBar";
 import ListItems from "@/components/ListItems";
+import { AuthContext } from "@/context/AuthContext";
 import { ItemType } from "@/types/Item";
 import { UserType } from "@/types/User";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { FaUser } from "react-icons/fa";
 
 type UserProps = {
@@ -23,6 +24,7 @@ const ListUsersForm = ({ data }: UserProps) => {
   const [filteredUsers, setFilteredUsers] = useState<ItemType[]>(users);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<ItemType | null>(null);
+  const { user } = useContext(AuthContext);
 
   const handleDeleteClick = (user: ItemType) => {
     setSelectedUser(user);
@@ -35,6 +37,11 @@ const ListUsersForm = ({ data }: UserProps) => {
   };
 
   const handleDeleteUser = async () => {
+    if (selectedUser?.id !== user?.userId) {
+      alert("Usuário não pode se deletar!");
+      handleCloseModal();
+      return;
+    }
     if (selectedUser) {
       try {
         const response = await fetch(
