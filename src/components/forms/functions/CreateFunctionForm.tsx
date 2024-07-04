@@ -37,6 +37,7 @@ const CreateFunctionForm = () => {
             id="transaction"
             value={selectedTransaction}
             onChange={(e) => setSelectedTransaction(e.target.value)}
+            required
           >
             <option value="" disabled>
               Selecione uma transação
@@ -60,6 +61,7 @@ const CreateFunctionForm = () => {
             placeholder="Digite o nome da função..."
             value={functionName}
             onChange={(e) => setFunctionName(e.target.value)}
+            required
           />
         </label>
         <SubmitBtn>Criar função</SubmitBtn>

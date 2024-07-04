@@ -14,6 +14,7 @@ const CreateUserForm = () => {
             name="username"
             id="username"
             placeholder="Digite o nome do usuário..."
+            required
           />
         </label>
         <label htmlFor="email">
@@ -23,6 +24,7 @@ const CreateUserForm = () => {
             name="email"
             id="email"
             placeholder="Digite o email do usuário..."
+            required
           />
         </label>
         <label htmlFor="password">
@@ -32,6 +34,7 @@ const CreateUserForm = () => {
             name="password"
             id="password"
             placeholder="Digite a senha do usuário..."
+            required
           />
         </label>
         <SubmitBtn>Criar usuário</SubmitBtn>

@@ -73,6 +73,7 @@ const UpdateFunctionForm = ({ data }: UpdateFunctionProps) => {
             placeholder="Digite o nome da função..."
             value={functionName}
             onChange={(e) => setFunctionName(e.target.value)}
+            required
           />
         </label>
         <button type="submit" className="button-orange">

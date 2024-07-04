@@ -14,6 +14,7 @@ const CreateModuleForm = () => {
             name="nameModule"
             id="nameModule"
             placeholder="Digite o nome do módulo..."
+            required
           />
         </label>
         <SubmitBtn>Criar módulo</SubmitBtn>

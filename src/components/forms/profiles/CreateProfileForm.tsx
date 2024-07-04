@@ -37,6 +37,7 @@ const CreateProfileForm = () => {
             id="module"
             value={selectedModule}
             onChange={(e) => setSelectedModule(e.target.value)}
+            required
           >
             <option value="" disabled>
               Selecione um módulo
@@ -57,6 +58,7 @@ const CreateProfileForm = () => {
             placeholder="Digite o nome do perfil..."
             value={profileName}
             onChange={(e) => setProfileName(e.target.value)}
+            required
           />
         </label>
         <SubmitBtn>Criar perfil</SubmitBtn>

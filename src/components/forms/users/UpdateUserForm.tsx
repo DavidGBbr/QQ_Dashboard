@@ -67,6 +67,7 @@ const UpdateUserForm = ({ data }: UpdateUserProps) => {
             placeholder="Digite o nome do usuário..."
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
           />
         </label>
         <label htmlFor="email">
@@ -87,6 +88,7 @@ const UpdateUserForm = ({ data }: UpdateUserProps) => {
             id="profile"
             value={selectedProfileId}
             onChange={(e) => setSelectedProfileId(Number(e.target.value))}
+            required
           >
             <option value="" disabled>
               Selecione um perfil

@@ -34,6 +34,7 @@ const UpdateModuleForm = ({ data }: UpdateFunctionProps) => {
             placeholder="Digite o nome do módulo..."
             value={moduleName}
             onChange={(e) => setModuleName(e.target.value)}
+            required
           />
         </label>
         <SubmitBtn>Atualizar módulo</SubmitBtn>

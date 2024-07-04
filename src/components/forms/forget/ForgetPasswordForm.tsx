@@ -33,6 +33,7 @@ const ForgetPasswordForm = () => {
         placeholder="Digite seu email..."
         value={email}
         onChange={(e) => setEmailInput(e.target.value)}
+        required
       />
       <SubmitBtn>Enviar link de recuperação</SubmitBtn>
     </form>

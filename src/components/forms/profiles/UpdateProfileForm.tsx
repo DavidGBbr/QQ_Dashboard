@@ -43,6 +43,7 @@ const UpdateProfileForm = ({ data }: UpdateProfileProps) => {
             id="module"
             value={selectedModule}
             onChange={(e) => setSelectedModule(e.target.value)}
+            required
           >
             <option value="" disabled>
               Selecione um módulo
@@ -63,6 +64,7 @@ const UpdateProfileForm = ({ data }: UpdateProfileProps) => {
             placeholder="Digite o nome do perfil..."
             value={profileName}
             onChange={(e) => setProfileName(e.target.value)}
+            required
           />
         </label>
         <SubmitBtn>Editar perfil</SubmitBtn>

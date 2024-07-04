@@ -36,7 +36,9 @@ const ListItems: React.FC<ListItemsProps> = ({
     router.push(`/${detailPath}/${itemId}`);
   };
 
-  const paginatedItems = items.slice(
+  const sortedItems = [...items].sort((a, b) => b.id - a.id);
+
+  const paginatedItems = sortedItems.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );

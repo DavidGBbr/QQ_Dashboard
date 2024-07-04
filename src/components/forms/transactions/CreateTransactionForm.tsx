@@ -41,6 +41,7 @@ const CreateTransactionForm = () => {
             id="module"
             value={selectedModule}
             onChange={(e) => setSelectedModule(e.target.value)}
+            required
           >
             <option value="" disabled>
               Selecione um módulo
@@ -61,6 +62,7 @@ const CreateTransactionForm = () => {
             placeholder="Digite o nome da transação..."
             value={transactionName}
             onChange={(e) => setTransactionName(e.target.value)}
+            required
           />
         </label>
         <SubmitBtn>Criar transação</SubmitBtn>
