@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from "react";
 import "@/styles/form.css";
 import RedirectBtn from "@/components/RedirectBtn";
-import DetailProfileForm from "@/components/forms/profiles/DetailProfileForm";
 import { FunctionType } from "@/types/Function";
 import DetailFunctionForm from "@/components/forms/functions/DetailFunctionForm";
+import { api } from "@/services/apiClient";
 
 type PageParams = {
   params: {
@@ -17,13 +17,8 @@ const DetailFunctionPage = ({ params }: PageParams) => {
 
   useEffect(() => {
     const getFunction = async () => {
-      const response = await fetch(
-        `http://localhost:3333/function/${params.id}`,
-        {
-          next: { revalidate: 0 },
-        }
-      );
-      const data = (await response.json()) as FunctionType;
+      const response = await api.get(`/function/${params.id}`);
+      const data = (await response.data) as FunctionType;
       setFunction(data);
     };
 

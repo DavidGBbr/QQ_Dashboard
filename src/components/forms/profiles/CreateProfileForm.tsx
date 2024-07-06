@@ -1,6 +1,7 @@
 "use client";
 import { createProfile } from "@/actions/profiles/CreateProfile";
 import { SubmitBtn } from "@/components/SubmitBtn";
+import { api } from "@/services/apiClient";
 import { ModuleType } from "@/types/Module";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -13,8 +14,8 @@ const CreateProfileForm = () => {
 
   useEffect(() => {
     const getModules = async () => {
-      const response = await fetch("http://localhost:3333/module");
-      const modulesData = await response.json();
+      const response = await api.get("/module");
+      const modulesData = await response.data;
       setModules(modulesData);
     };
     getModules();

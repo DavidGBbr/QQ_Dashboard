@@ -1,5 +1,6 @@
 "use client";
 import { updateFunction } from "@/actions/functions/UpdateFunction";
+import { api } from "@/services/apiClient";
 import { TransactionType } from "@/types/Transaction";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -23,8 +24,8 @@ const UpdateFunctionForm = ({ data }: UpdateFunctionProps) => {
 
   useEffect(() => {
     const getTransactions = async () => {
-      const response = await fetch("http://localhost:3333/transaction");
-      const transactionsData = await response.json();
+      const response = await api.get("http://localhost:3333/transaction");
+      const transactionsData = await response.data;
       setTransactions(transactionsData);
       console.log(transactionsData);
     };

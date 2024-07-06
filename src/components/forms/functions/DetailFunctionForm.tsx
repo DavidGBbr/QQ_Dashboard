@@ -17,11 +17,11 @@ const DetailFunctionForm = ({ data }: DetailFunctionProps) => {
               <td>{data.functionId}</td>
             </tr>
             <tr>
-              <th>Nome do perfil</th>
+              <th>Nome da função</th>
               <td>{data.name}</td>
             </tr>
             <tr>
-              <th>Transações relacionados</th>
+              <th>Transações relacionadas</th>
               <td>
                 {data.transactionFunction &&
                 data.transactionFunction.length > 0 ? (

@@ -3,6 +3,7 @@ import DeleteModal from "@/components/DeleteModal";
 import ItemSearchBar from "@/components/ItemSearchBar";
 import ListItems from "@/components/ListItems";
 import RedirectBtn from "@/components/RedirectBtn";
+import { api } from "@/services/apiClient";
 import { FunctionType } from "@/types/Function";
 import { ItemType } from "@/types/Item";
 import { useEffect, useState } from "react";
@@ -39,12 +40,7 @@ const ListFunctionsForm = ({ data }: FunctionProps) => {
   const handleDeleteFunction = async () => {
     if (selectedFunction) {
       try {
-        const response = await fetch(
-          `http://localhost:3333/function/${selectedFunction.id}`,
-          {
-            method: "DELETE",
-          }
-        );
+        const response = await api.delete(`/function/${selectedFunction.id}`);
 
         const updatedFunctions = functions.filter(
           (_function) => _function.id !== selectedFunction.id

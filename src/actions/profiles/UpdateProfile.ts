@@ -1,3 +1,5 @@
+import axios from "axios";
+
 type ResponseType = {
   message: string;
   associated: boolean;
@@ -10,26 +12,22 @@ export async function updateProfile(formData: FormData) {
     name: formData.get("profile") as string,
   };
 
-  const response = await fetch("http://localhost:3333/profile", {
-    next: { revalidate: 0 },
-    method: "PATCH",
-    body: JSON.stringify(profile),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  try {
+    const response = await axios.patch<ResponseType>("/profile", profile, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-  if (!response.ok) {
+    const associated = response.data;
+
+    alert(
+      associated.associated
+        ? "Perfil atualizado: módulo vinculado!"
+        : "Perfil atualizado: módulo desvinculado!"
+    );
+  } catch (error) {
     alert("Falha ao atualizar o perfil");
-    console.error("Failed to update the profile");
-    return;
+    console.error("Failed to update the profile", error);
   }
-
-  const associated = (await response.json()) as ResponseType;
-
-  alert(
-    associated.associated
-      ? "Perfil atualizado: módulo vinculado!"
-      : "Perfil atualizado: módulo desvinculado!"
-  );
 }

@@ -3,14 +3,15 @@ import React, { useEffect, useState } from "react";
 import "@/styles/form.css";
 import { UserType } from "@/types/User";
 import ListUsersForm from "@/components/forms/users/ListUsersForm";
+import { api } from "@/services/apiClient";
 
 const Users = () => {
   const [data, setData] = useState<UserType[]>();
 
   useEffect(() => {
     const getData = async () => {
-      const response = await fetch("http://localhost:3333/user");
-      const users = (await response.json()) as UserType[];
+      const response = await api.get("/user");
+      const users = (await response.data) as UserType[];
       setData(users);
     };
 

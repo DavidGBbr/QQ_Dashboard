@@ -1,5 +1,6 @@
 "use client";
 import { updateTransaction } from "@/actions/transactions/UpdateTransaction";
+import { api } from "@/services/apiClient";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -39,8 +40,8 @@ const UpdateTransactionForm = ({ data }: UpdateUserProps) => {
 
   useEffect(() => {
     const getModules = async () => {
-      const response = await fetch("http://localhost:3333/module");
-      const modulesData = await response.json();
+      const response = await api.get("/module");
+      const modulesData = await response.data;
       setModules(modulesData);
     };
     getModules();

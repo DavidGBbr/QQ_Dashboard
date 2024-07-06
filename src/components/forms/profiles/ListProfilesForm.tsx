@@ -2,6 +2,7 @@
 import DeleteModal from "@/components/DeleteModal";
 import ItemSearchBar from "@/components/ItemSearchBar";
 import ListItems from "@/components/ListItems";
+import { api } from "@/services/apiClient";
 import { ItemType } from "@/types/Item";
 import { ProfileType } from "@/types/Profile";
 import { useEffect, useState } from "react";
@@ -36,14 +37,9 @@ const ListProfilesForm = ({ data }: ProfileProps) => {
   const handleDeleteProfile = async () => {
     if (selectedProfile) {
       try {
-        const response = await fetch(
-          `http://localhost:3333/profile/${selectedProfile.id}`,
-          {
-            method: "DELETE",
-          }
-        );
+        const response = await api.delete(`/profile/${selectedProfile.id}`);
 
-        if (!response.ok) {
+        if (!response.data.ok) {
           throw new Error("Failed to delete the profile");
         }
 

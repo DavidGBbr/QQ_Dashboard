@@ -4,6 +4,7 @@ import "@/styles/form.css";
 import RedirectBtn from "@/components/RedirectBtn";
 import { ProfileType } from "@/types/Profile";
 import DetailProfileForm from "@/components/forms/profiles/DetailProfileForm";
+import { api } from "@/services/apiClient";
 
 type PageParams = {
   params: {
@@ -16,13 +17,8 @@ const DetailProfilePage = ({ params }: PageParams) => {
 
   useEffect(() => {
     const getProfile = async () => {
-      const response = await fetch(
-        `http://localhost:3333/profile/${params.id}`,
-        {
-          next: { revalidate: 0 },
-        }
-      );
-      const data = (await response.json()) as ProfileType;
+      const response = await api.get(`/profile/${params.id}`);
+      const data = (await response.data) as ProfileType;
       setProfile(data);
     };
 

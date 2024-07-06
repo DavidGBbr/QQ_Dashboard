@@ -1,6 +1,7 @@
 "use client";
 import { createTransaction } from "@/actions/transactions/CreateTransaction";
 import { SubmitBtn } from "@/components/SubmitBtn";
+import { api } from "@/services/apiClient";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -17,8 +18,8 @@ const CreateTransactionForm = () => {
 
   useEffect(() => {
     const getModules = async () => {
-      const response = await fetch("http://localhost:3333/module");
-      const modulesData = await response.json();
+      const response = await api.get("/module");
+      const modulesData = await response.data;
       setModules(modulesData);
     };
     getModules();

@@ -4,6 +4,7 @@ import "@/styles/form.css";
 import RedirectBtn from "@/components/RedirectBtn";
 import { ModuleType } from "@/types/Module";
 import DetailModuleForm from "@/components/forms/modules/DetailModuleForm";
+import { api } from "@/services/apiClient";
 
 type PageParams = {
   params: {
@@ -16,13 +17,10 @@ const DetailModulePage = ({ params }: PageParams) => {
 
   useEffect(() => {
     const getModule = async () => {
-      const response = await fetch(
-        `http://localhost:3333/module/${params.id}`,
-        {
-          next: { revalidate: 0 },
-        }
+      const response = await api.get(
+        `http://localhost:3333/module/${params.id}`
       );
-      const data = (await response.json()) as ModuleType;
+      const data = (await response.data) as ModuleType;
       setModule(data);
     };
 

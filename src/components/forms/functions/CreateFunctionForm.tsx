@@ -1,6 +1,7 @@
 "use client";
 import { createFunction } from "@/actions/functions/CreateFunction";
 import { SubmitBtn } from "@/components/SubmitBtn";
+import { api } from "@/services/apiClient";
 import { TransactionType } from "@/types/Transaction";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -13,8 +14,8 @@ const CreateFunctionForm = () => {
 
   useEffect(() => {
     const getTransactions = async () => {
-      const response = await fetch("http://localhost:3333/transaction");
-      const transactionsData = await response.json();
+      const response = await api.get("/transaction");
+      const transactionsData = await response.data;
       setTransactions(transactionsData);
     };
     getTransactions();

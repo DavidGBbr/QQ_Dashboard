@@ -2,6 +2,7 @@
 import DeleteModal from "@/components/DeleteModal";
 import ItemSearchBar from "@/components/ItemSearchBar";
 import ListItems from "@/components/ListItems";
+import { api } from "@/services/apiClient";
 import { ItemType } from "@/types/Item";
 import { TransactionType } from "@/types/Transaction";
 import { useState, useEffect } from "react";
@@ -37,12 +38,7 @@ const ListTransactionsForm = ({ data }: TransactionProps) => {
   const handleDeleteTransaction = async () => {
     if (selectedTransaction) {
       try {
-        const response = await fetch(
-          `http://localhost:3333/transaction/${selectedTransaction.id}`,
-          {
-            method: "DELETE",
-          }
-        );
+        await api.delete(`/transaction/${selectedTransaction.id}`);
 
         const updatedTransactions = transactions.filter(
           (transaction) => transaction.id !== selectedTransaction.id

@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export async function updateFunction(formData: FormData) {
   const _function = {
     functionId: Number(formData.get("functionId")),
@@ -5,21 +7,22 @@ export async function updateFunction(formData: FormData) {
     transactionId: Number(formData.get("transactionId")),
   };
 
-  const response = await fetch("http://localhost:3333/function", {
-    next: { revalidate: 0 },
-    method: "PUT",
-    body: JSON.stringify(_function),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  try {
+    const response = await axios.put("/function", _function, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-  if (!response.ok) {
+    if (response.status !== 200) {
+      alert("Falha ao atualizar a função");
+      console.error("Failed to update a function");
+      return;
+    }
+
+    alert("Função atualizada com sucesso!");
+  } catch (error) {
     alert("Falha ao atualizar a função");
-    console.error("Failed to update a function");
-    return;
+    console.error("Failed to update a function", error);
   }
-
-  await response.json();
-  alert("Função atualizada com sucesso!");
 }

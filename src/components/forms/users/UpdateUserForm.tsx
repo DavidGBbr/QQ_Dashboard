@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { ProfileType } from "@/types/Profile";
 import React, { useEffect, useState } from "react";
 import { updateUser } from "@/actions/users/UpdateUser";
+import { api } from "@/services/apiClient";
 
 type UpdateUserProps = {
   data:
@@ -26,8 +27,8 @@ const UpdateUserForm = ({ data }: UpdateUserProps) => {
 
   useEffect(() => {
     const getProfiles = async () => {
-      const response = await fetch("http://localhost:3333/profile");
-      const profilesData = await response.json();
+      const response = await api.get("/profile");
+      const profilesData = await response.data;
       setProfiles(profilesData);
     };
 

@@ -2,6 +2,7 @@
 import DeleteModal from "@/components/DeleteModal";
 import ItemSearchBar from "@/components/ItemSearchBar";
 import ListItems from "@/components/ListItems";
+import { api } from "@/services/apiClient";
 import { ItemType } from "@/types/Item";
 import { ModuleType } from "@/types/Module";
 import React, { useEffect, useState } from "react";
@@ -35,14 +36,9 @@ const ListModulesForm = ({ data }: ModuleProps) => {
   const handleDeleteModule = async () => {
     if (selectedModule) {
       try {
-        const response = await fetch(
-          `http://localhost:3333/module/${selectedModule.id}`,
-          {
-            method: "DELETE",
-          }
-        );
+        const response = await api.delete(`/module/${selectedModule.id}`);
 
-        if (!response.ok) {
+        if (!response.data.ok) {
           throw new Error("Failed to delete the module");
         }
 

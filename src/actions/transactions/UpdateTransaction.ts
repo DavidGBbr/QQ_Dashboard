@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export async function updateTransaction(formData: FormData) {
   const transaction = {
     transactionId: Number(formData.get("transactionId")),
@@ -5,21 +7,22 @@ export async function updateTransaction(formData: FormData) {
     moduleId: Number(formData.get("moduleId")),
   };
 
-  const response = await fetch("http://localhost:3333/transaction", {
-    next: { revalidate: 0 },
-    method: "PUT",
-    body: JSON.stringify(transaction),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  try {
+    const response = await axios.put("/transaction", transaction, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-  if (!response.ok) {
+    if (response.status !== 200) {
+      alert("Falha ao atualizar a transação");
+      console.error("Failed to update a transaction");
+      return;
+    }
+
+    alert("Transação atualizada com sucesso!");
+  } catch (error) {
     alert("Falha ao atualizar a transação");
-    console.error("Failed to update a transaction");
-    return;
+    console.error("Failed to update a transaction", error);
   }
-
-  await response.json();
-  alert("Transação atualizada com sucesso!");
 }

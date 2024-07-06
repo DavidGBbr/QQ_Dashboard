@@ -1,3 +1,5 @@
+import axios from "axios";
+
 type ResetProps = {
   email: string;
   password: string;
@@ -10,19 +12,22 @@ export async function resetFunction({
   token,
 }: ResetProps): Promise<boolean> {
   const resetPasswordData = { email, password };
-  const response = await fetch(`http://localhost:3333/forget/${token}`, {
-    method: "PATCH",
-    body: JSON.stringify(resetPasswordData),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
 
-  if (!response.ok) {
-    console.error("Failed to update password");
+  try {
+    const response = await axios.patch(`/forget/${token}`, resetPasswordData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.status !== 200) {
+      console.error("Failed to update password");
+      throw new Error("Failed to update password");
+    }
+
+    return true;
+  } catch (error) {
+    console.error("Failed to update password", error);
     throw new Error("Failed to update password");
   }
-
-  await response.json();
-  return true;
 }

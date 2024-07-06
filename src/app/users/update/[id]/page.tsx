@@ -4,6 +4,7 @@ import "@/styles/form.css";
 import RedirectBtn from "@/components/RedirectBtn";
 import UpdateUserForm from "@/components/forms/users/UpdateUserForm";
 import { UserType } from "@/types/User";
+import { api } from "@/services/apiClient";
 
 type PageParams = {
   params: {
@@ -16,10 +17,8 @@ const UpdateUserPage = ({ params }: PageParams) => {
 
   useEffect(() => {
     const getUser = async () => {
-      const response = await fetch(`http://localhost:3333/users/${params.id}`, {
-        next: { revalidate: 0 },
-      });
-      const data = (await response.json()) as UserType;
+      const response = await api.get(`/users/${params.id}`);
+      const data = (await response.data) as UserType;
       setUser(data);
     };
 

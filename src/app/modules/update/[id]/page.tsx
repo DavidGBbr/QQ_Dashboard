@@ -2,6 +2,7 @@
 
 import RedirectBtn from "@/components/RedirectBtn";
 import UpdateModuleForm from "@/components/forms/modules/UpdateModuleForm";
+import { api } from "@/services/apiClient";
 import { useEffect, useState } from "react";
 
 type PageParams = {
@@ -15,13 +16,8 @@ const UpdateModulePage = ({ params }: PageParams) => {
 
   useEffect(() => {
     const getModule = async () => {
-      const response = await fetch(
-        `http://localhost:3333/module/${params.id}`,
-        {
-          next: { revalidate: 0 },
-        }
-      );
-      const data = await response.json();
+      const response = await api.get(`/module/${params.id}`);
+      const data = await response.data;
       setModule(data);
     };
 

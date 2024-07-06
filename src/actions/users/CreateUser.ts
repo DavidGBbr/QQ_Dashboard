@@ -1,3 +1,4 @@
+import { api } from "@/services/apiClient";
 import { redirect } from "next/navigation";
 
 export async function createUser(formData: FormData) {
@@ -8,22 +9,23 @@ export async function createUser(formData: FormData) {
     profileId: 1,
   };
 
-  const response = await fetch("http://localhost:3333/user", {
-    next: { revalidate: 0 },
-    method: "POST",
-    body: JSON.stringify(user),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  try {
+    const response = await api.post("/user", user, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-  if (!response.ok) {
+    if (response.status !== 200) {
+      alert("Falha ao criar o usuário");
+      console.error("Failed to create a user");
+      return;
+    }
+
+    alert("Usuário criado com sucesso!");
+    redirect("/users");
+  } catch (error) {
     alert("Falha ao criar o usuário");
-    console.error("Failed to create a user");
-    return;
+    console.error("Failed to create a user", error);
   }
-
-  await response.json();
-  alert("Usuário criado com sucesso!");
-  redirect("/users");
 }

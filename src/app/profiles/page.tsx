@@ -3,14 +3,15 @@ import React, { useEffect, useState } from "react";
 import "@/styles/form.css";
 import ListProfilesForm from "@/components/forms/profiles/ListProfilesForm";
 import { ProfileType } from "@/types/Profile";
+import { api } from "@/services/apiClient";
 
 const Profiles = () => {
   const [data, setData] = useState<ProfileType[]>();
 
   useEffect(() => {
     const getData = async () => {
-      const response = await fetch("http://localhost:3333/profile");
-      const profiles = (await response.json()) as ProfileType[];
+      const response = await api.get("/profile");
+      const profiles = (await response.data) as ProfileType[];
       setData(profiles);
     };
 

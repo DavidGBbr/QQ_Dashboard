@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import "@/styles/form.css";
 import RedirectBtn from "@/components/RedirectBtn";
 import UpdateProfileForm from "@/components/forms/profiles/UpdateProfileForm";
+import { api } from "@/services/apiClient";
 
 type PageParams = {
   params: {
@@ -15,10 +16,8 @@ const UpdateProfilePage = ({ params }: PageParams) => {
 
   useEffect(() => {
     const getProfile = async () => {
-      const response = await fetch(
-        `http://localhost:3333/profile/${params.id}`
-      );
-      const data = await response.json();
+      const response = await api.get(`/profile/${params.id}`);
+      const data = await response.data;
       setProfile(data);
     };
     getProfile();

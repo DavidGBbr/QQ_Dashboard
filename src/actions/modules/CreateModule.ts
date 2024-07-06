@@ -1,3 +1,4 @@
+import axios from "axios";
 import { redirect } from "next/navigation";
 
 export async function createModule(formData: FormData) {
@@ -5,22 +6,23 @@ export async function createModule(formData: FormData) {
     name: formData.get("nameModule") as string,
   };
 
-  const response = await fetch("http://localhost:3333/module", {
-    next: { revalidate: 0 },
-    method: "POST",
-    body: JSON.stringify(moduleData),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  try {
+    const response = await axios.post("/module", moduleData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-  if (!response.ok) {
+    if (response.status !== 200) {
+      alert("Falha ao criar o módulo");
+      console.error("Failed to create a module");
+      return;
+    }
+
+    alert("Módulo criado com sucesso!");
+    redirect("/modules");
+  } catch (error) {
     alert("Falha ao criar o módulo");
-    console.error("Failed to create a module");
-    return;
+    console.error("Failed to create a module", error);
   }
-
-  await response.json();
-  alert("Módulo criado com sucesso!");
-  redirect("/modules");
 }

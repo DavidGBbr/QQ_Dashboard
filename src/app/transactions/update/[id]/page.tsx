@@ -2,6 +2,7 @@
 
 import RedirectBtn from "@/components/RedirectBtn";
 import UpdateTransactionForm from "@/components/forms/transactions/UpdateTransactionForm";
+import { api } from "@/services/apiClient";
 import { useEffect, useState } from "react";
 
 type PageParams = {
@@ -15,13 +16,8 @@ const UpdateTransactionPage = ({ params }: PageParams) => {
 
   useEffect(() => {
     const getTransaction = async () => {
-      const response = await fetch(
-        `http://localhost:3333/transaction/${params.id}`,
-        {
-          next: { revalidate: 0 },
-        }
-      );
-      const data = await response.json();
+      const response = await api.get(`/transaction/${params.id}`);
+      const data = await response.data;
       setTransaction(data);
     };
 

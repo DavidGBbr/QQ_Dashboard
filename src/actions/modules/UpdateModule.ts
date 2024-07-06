@@ -1,24 +1,27 @@
+import axios from "axios";
+
 export async function updateModule(formData: FormData) {
   const moduleData = {
     moduleId: Number(formData.get("moduleId")),
     name: formData.get("name") as string,
   };
 
-  const response = await fetch("http://localhost:3333/module", {
-    next: { revalidate: 0 },
-    method: "PATCH",
-    body: JSON.stringify(moduleData),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  try {
+    const response = await axios.patch("/module", moduleData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-  if (!response.ok) {
+    if (response.status !== 200) {
+      alert("Falha ao atualizar o módulo");
+      console.error("Failed to update the module");
+      return;
+    }
+
+    alert("Módulo atualizado com sucesso!");
+  } catch (error) {
     alert("Falha ao atualizar o módulo");
-    console.error("Failed to update the module");
-    return;
+    console.error("Failed to update the module", error);
   }
-
-  await response.json();
-  alert("Módulo atualizado com sucesso!");
 }

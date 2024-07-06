@@ -3,6 +3,7 @@ import DeleteModal from "@/components/DeleteModal";
 import ItemSearchBar from "@/components/ItemSearchBar";
 import ListItems from "@/components/ListItems";
 import { AuthContext } from "@/context/AuthContext";
+import { api } from "@/services/apiClient";
 import { ItemType } from "@/types/Item";
 import { UserType } from "@/types/User";
 import { useState, useEffect, useContext } from "react";
@@ -44,14 +45,11 @@ const ListUsersForm = ({ data }: UserProps) => {
     }
     if (selectedUser) {
       try {
-        const response = await fetch(
-          `http://localhost:3333/user/${selectedUser.id}`,
-          {
-            method: "DELETE",
-          }
+        const response = await api.delete(
+          `http://localhost:3333/user/${selectedUser.id}`
         );
 
-        if (!response.ok) {
+        if (!response.data.ok) {
           throw new Error("Failed to delete the user");
         }
 

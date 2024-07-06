@@ -2,6 +2,7 @@
 
 import RedirectBtn from "@/components/RedirectBtn";
 import UpdateFunctionForm from "@/components/forms/functions/UpdateFunctionForm";
+import { api } from "@/services/apiClient";
 import { useEffect, useState } from "react";
 
 type PageParams = {
@@ -15,13 +16,8 @@ const UpdateFunctionPage = ({ params }: PageParams) => {
 
   useEffect(() => {
     const getFunction = async () => {
-      const response = await fetch(
-        `http://localhost:3333/function/${params.id}`,
-        {
-          next: { revalidate: 0 },
-        }
-      );
-      const data = await response.json();
+      const response = await api.get(`/${params.id}`);
+      const data = await response.data;
       setFunction(data);
     };
 
