@@ -1,5 +1,4 @@
-import axios from "axios";
-import { redirect } from "next/navigation";
+import { api } from "@/services/apiClient";
 
 export async function createModule(formData: FormData) {
   const moduleData = {
@@ -7,7 +6,7 @@ export async function createModule(formData: FormData) {
   };
 
   try {
-    const response = await axios.post("/module", moduleData, {
+    const response = await api.post("/module", moduleData, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -20,7 +19,7 @@ export async function createModule(formData: FormData) {
     }
 
     alert("Módulo criado com sucesso!");
-    redirect("/modules");
+    window.location.href = "/modules";
   } catch (error) {
     alert("Falha ao criar o módulo");
     console.error("Failed to create a module", error);

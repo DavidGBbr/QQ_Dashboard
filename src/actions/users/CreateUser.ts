@@ -1,5 +1,4 @@
 import { api } from "@/services/apiClient";
-import { redirect } from "next/navigation";
 
 export async function createUser(formData: FormData) {
   const user = {
@@ -23,7 +22,8 @@ export async function createUser(formData: FormData) {
     }
 
     alert("Usuário criado com sucesso!");
-    redirect("/users");
+
+    window.location.href = "/users";
   } catch (error) {
     alert("Falha ao criar o usuário");
     console.error("Failed to create a user", error);

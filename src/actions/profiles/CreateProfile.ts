@@ -1,4 +1,4 @@
-import axios from "axios";
+import { api } from "@/services/apiClient";
 
 export async function createProfile(formData: FormData) {
   const profile = {
@@ -7,7 +7,7 @@ export async function createProfile(formData: FormData) {
   };
 
   try {
-    const response = await axios.post("/profile", profile, {
+    const response = await api.post("/profile", profile, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -20,6 +20,7 @@ export async function createProfile(formData: FormData) {
     }
 
     alert("Perfil criado com sucesso!");
+    window.location.href = "/profiles";
   } catch (error) {
     alert("Falha ao criar o perfil");
     console.error("Failed to create a profile", error);

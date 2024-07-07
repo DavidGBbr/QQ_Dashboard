@@ -1,4 +1,4 @@
-import axios from "axios";
+import { api } from "@/services/apiClient";
 
 export async function createTransaction(formData: FormData) {
   const transaction = {
@@ -7,7 +7,7 @@ export async function createTransaction(formData: FormData) {
   };
 
   try {
-    const response = await axios.post("/transaction", transaction, {
+    const response = await api.post("/transaction", transaction, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -20,6 +20,7 @@ export async function createTransaction(formData: FormData) {
     }
 
     alert("Transação criada com sucesso!");
+    window.location.href = "/transactions";
   } catch (error) {
     alert("Falha ao criar a transação");
     console.error("Failed to create a transaction", error);

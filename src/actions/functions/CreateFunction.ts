@@ -1,4 +1,4 @@
-import axios from "axios";
+import { api } from "@/services/apiClient";
 
 export async function createFunction(formData: FormData) {
   const _function = {
@@ -7,19 +7,20 @@ export async function createFunction(formData: FormData) {
   };
 
   try {
-    const response = await axios.post("/function", _function, {
+    const response = await api.post("/function", _function, {
       headers: {
         "Content-Type": "application/json",
       },
     });
 
-    if (response.status !== 200 && response.status !== 201) {
+    if (response.status !== 200) {
       alert("Falha ao criar a função");
       console.error("Failed to create a function");
       return;
     }
 
     alert("Função criada com sucesso!");
+    window.location.href = "/functions";
   } catch (error) {
     alert("Falha ao criar a função");
     console.error("Failed to create a function", error);
