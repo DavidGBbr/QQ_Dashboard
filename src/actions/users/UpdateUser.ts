@@ -1,4 +1,4 @@
-import axios from "axios";
+import { api } from "@/services/apiClient";
 
 export async function updateUser(user: {
   userId: number;
@@ -7,7 +7,7 @@ export async function updateUser(user: {
   profileId: number;
 }) {
   try {
-    const response = await axios.patch("/user", user, {
+    const response = await api.patch(`/user`, user, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -15,6 +15,7 @@ export async function updateUser(user: {
 
     if (response.status !== 200) {
       alert("Falha ao atualizar o usuário");
+      console.error("Failed to update the user");
       return { success: false };
     }
 

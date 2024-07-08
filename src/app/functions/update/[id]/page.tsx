@@ -16,7 +16,7 @@ const UpdateFunctionPage = ({ params }: PageParams) => {
 
   useEffect(() => {
     const getFunction = async () => {
-      const response = await api.get(`/${params.id}`);
+      const response = await api.get(`function/${params.id}`);
       const data = await response.data;
       setFunction(data);
     };

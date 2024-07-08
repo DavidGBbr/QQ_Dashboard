@@ -1,4 +1,4 @@
-import axios from "axios";
+import { api } from "@/services/apiClient";
 
 type ResponseType = {
   message: string;
@@ -13,13 +13,19 @@ export async function updateProfile(formData: FormData) {
   };
 
   try {
-    const response = await axios.patch<ResponseType>("/profile", profile, {
+    const response = await api.patch("/profile", profile, {
       headers: {
         "Content-Type": "application/json",
       },
     });
 
-    const associated = response.data;
+    if (response.status !== 200) {
+      alert("Falha ao atualizar o perfil");
+      console.error("Failed to update the profile");
+      return;
+    }
+
+    const associated = (await response.data) as ResponseType;
 
     alert(
       associated.associated

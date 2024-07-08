@@ -1,4 +1,4 @@
-import axios from "axios";
+import { api } from "@/services/apiClient";
 
 export async function updateModule(formData: FormData) {
   const moduleData = {
@@ -7,7 +7,7 @@ export async function updateModule(formData: FormData) {
   };
 
   try {
-    const response = await axios.patch("/module", moduleData, {
+    const response = await api.patch("/module", moduleData, {
       headers: {
         "Content-Type": "application/json",
       },

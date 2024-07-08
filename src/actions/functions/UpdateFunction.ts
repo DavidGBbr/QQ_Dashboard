@@ -1,4 +1,4 @@
-import axios from "axios";
+import { api } from "@/services/apiClient";
 
 export async function updateFunction(formData: FormData) {
   const _function = {
@@ -8,7 +8,7 @@ export async function updateFunction(formData: FormData) {
   };
 
   try {
-    const response = await axios.put("/function", _function, {
+    const response = await api.put("/function", _function, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -16,13 +16,13 @@ export async function updateFunction(formData: FormData) {
 
     if (response.status !== 200) {
       alert("Falha ao atualizar a função");
-      console.error("Failed to update a function");
+      console.error("Failed to update the function");
       return;
     }
 
     alert("Função atualizada com sucesso!");
   } catch (error) {
     alert("Falha ao atualizar a função");
-    console.error("Failed to update a function", error);
+    console.error("Failed to update the function", error);
   }
 }

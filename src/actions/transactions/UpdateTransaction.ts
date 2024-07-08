@@ -1,4 +1,4 @@
-import axios from "axios";
+import { api } from "@/services/apiClient";
 
 export async function updateTransaction(formData: FormData) {
   const transaction = {
@@ -8,7 +8,7 @@ export async function updateTransaction(formData: FormData) {
   };
 
   try {
-    const response = await axios.put("/transaction", transaction, {
+    const response = await api.put("/transaction", transaction, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -16,13 +16,13 @@ export async function updateTransaction(formData: FormData) {
 
     if (response.status !== 200) {
       alert("Falha ao atualizar a transação");
-      console.error("Failed to update a transaction");
+      console.error("Failed to update the transaction");
       return;
     }
 
     alert("Transação atualizada com sucesso!");
   } catch (error) {
     alert("Falha ao atualizar a transação");
-    console.error("Failed to update a transaction", error);
+    console.error("Failed to update the transaction", error);
   }
 }
