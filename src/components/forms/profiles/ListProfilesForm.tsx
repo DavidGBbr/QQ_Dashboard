@@ -1,11 +1,10 @@
-"use client";
-import DeleteModal from "@/components/DeleteModal";
-import ItemSearchBar from "@/components/ItemSearchBar";
-import ListItems from "@/components/ListItems";
 import { api } from "@/services/apiClient";
 import { ItemType } from "@/types/Item";
 import { ProfileType } from "@/types/Profile";
 import { useEffect, useState } from "react";
+import DeleteModal from "@/components/DeleteModal";
+import ItemSearchBar from "@/components/ItemSearchBar";
+import ListItems from "@/components/ListItems";
 import { FaUserCog } from "react-icons/fa";
 
 type ProfileProps = {
@@ -39,7 +38,7 @@ const ListProfilesForm = ({ data }: ProfileProps) => {
       try {
         const response = await api.delete(`/profile/${selectedProfile.id}`);
 
-        if (!response.data.ok) {
+        if (response.status !== 200) {
           throw new Error("Failed to delete the profile");
         }
 
@@ -53,7 +52,7 @@ const ListProfilesForm = ({ data }: ProfileProps) => {
         alert("Perfil deletado com sucesso!");
       } catch (error) {
         alert("Falha ao deletar o perfil");
-        console.error("Failed to delete the profile: ", error);
+        console.error("Failed to delete the profile:", error);
       } finally {
         handleCloseModal();
       }

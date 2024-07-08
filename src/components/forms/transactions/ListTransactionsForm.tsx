@@ -1,11 +1,10 @@
-"use client";
-import DeleteModal from "@/components/DeleteModal";
-import ItemSearchBar from "@/components/ItemSearchBar";
-import ListItems from "@/components/ListItems";
 import { api } from "@/services/apiClient";
 import { ItemType } from "@/types/Item";
 import { TransactionType } from "@/types/Transaction";
 import { useState, useEffect } from "react";
+import DeleteModal from "@/components/DeleteModal";
+import ItemSearchBar from "@/components/ItemSearchBar";
+import ListItems from "@/components/ListItems";
 import { MdOutlineWindow } from "react-icons/md";
 
 type TransactionProps = {
@@ -38,7 +37,13 @@ const ListTransactionsForm = ({ data }: TransactionProps) => {
   const handleDeleteTransaction = async () => {
     if (selectedTransaction) {
       try {
-        await api.delete(`/transaction/${selectedTransaction.id}`);
+        const response = await api.delete(
+          `/transaction/${selectedTransaction.id}`
+        );
+
+        if (response.status !== 200) {
+          throw new Error("Failed to delete the transaction");
+        }
 
         const updatedTransactions = transactions.filter(
           (transaction) => transaction.id !== selectedTransaction.id
@@ -77,7 +82,6 @@ const ListTransactionsForm = ({ data }: TransactionProps) => {
           inputPlaceholder="Digite o nome da transação..."
           onSearch={handleSearch}
         />
-
         <div>
           <ListItems
             items={filteredTransactions}

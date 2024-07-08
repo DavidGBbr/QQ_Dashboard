@@ -1,11 +1,10 @@
-"use client";
-import DeleteModal from "@/components/DeleteModal";
-import ItemSearchBar from "@/components/ItemSearchBar";
-import ListItems from "@/components/ListItems";
 import { api } from "@/services/apiClient";
 import { ItemType } from "@/types/Item";
 import { ModuleType } from "@/types/Module";
 import React, { useEffect, useState } from "react";
+import DeleteModal from "@/components/DeleteModal";
+import ItemSearchBar from "@/components/ItemSearchBar";
+import ListItems from "@/components/ListItems";
 import { MdOutlineViewModule } from "react-icons/md";
 
 type ModuleProps = {
@@ -38,7 +37,7 @@ const ListModulesForm = ({ data }: ModuleProps) => {
       try {
         const response = await api.delete(`/module/${selectedModule.id}`);
 
-        if (!response.data.ok) {
+        if (response.status !== 200) {
           throw new Error("Failed to delete the module");
         }
 
@@ -52,7 +51,7 @@ const ListModulesForm = ({ data }: ModuleProps) => {
         alert("Módulo deletado com sucesso!");
       } catch (error) {
         alert("Falha ao deletar o módulo");
-        console.error("Failed to delete the module: ", error);
+        console.error("Failed to delete the module:", error);
       } finally {
         handleCloseModal();
       }
